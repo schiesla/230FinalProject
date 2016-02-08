@@ -72,4 +72,9 @@ public class PointofInterest {
 	public String bs() {
 		return this.name + " " + this.type + " " + this.lat + " " + this.longit + " " + this.rating;
 	}
+	
+	public String toString() {
+		
+		return this.getName() + " " + this.getType() + " " + this.getRating();
+	}
 }
