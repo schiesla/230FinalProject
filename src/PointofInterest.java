@@ -10,11 +10,11 @@ public class PointofInterest {
 	double longit;
 	ArrayList<PointofInterest> neighbors;	
 	
-	public PointofInterest(String name, String type, double latitude, double longitude){
+	public PointofInterest(String name, String type, double latitude, double longitude, double rating){
 		this.name = name;
 		this.type = type;
 		this.straightLineDist = 0.0;
-		this.rating = 0.0;
+		this.rating = rating;
 		this.lat = latitude;
 		this.longit = longitude;
 		this.neighbors = new ArrayList<PointofInterest>();	
@@ -45,5 +45,9 @@ public class PointofInterest {
 	}
 	public ArrayList<PointofInterest> getNeighbors(){
 		return this.neighbors;
+	}
+	
+	public String bs() {
+		return this.name + " " + this.type + " " + this.lat + " " + this.longit + " " + this.rating;
 	}
 }
