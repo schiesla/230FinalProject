@@ -17,7 +17,8 @@ public class Map {
 
 	/**
 	 * 
-	 * Reads text file with all POIs data and populates the table.
+	 * Reads text file with all POIs data and populates the table with POIs and
+	 * the tree that sorts POIs by their rating.
 	 *
 	 */
 	@SuppressWarnings("resource")
@@ -58,7 +59,7 @@ public class Map {
 				rating = input.nextDouble();
 
 				PointofInterest poi = new PointofInterest(name, type, lat, longit, rating);
-				
+
 				this.tableOfPOIs.put(poi.getName(), poi);
 				this.ratings.add(poi);
 				count = -1;
@@ -70,6 +71,11 @@ public class Map {
 		input.close();
 	}
 
+	/**
+	 * 
+	 * Assigns neighbors to all POIs
+	 *
+	 */
 	@SuppressWarnings("resource")
 	public void populateNeighbors() {
 
@@ -87,7 +93,7 @@ public class Map {
 				String name = input.nextLine();
 				this.tableOfPOIs.get(key).neighbors.add(this.tableOfPOIs.get(name));
 			}
-			
+
 			input.close();
 		}
 	}
