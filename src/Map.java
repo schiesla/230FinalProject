@@ -2,12 +2,15 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.TreeSet;
 
 public class Map {
 	private HashMap<String, PointofInterest> tableOfPOIs;
+	private TreeSet<PointofInterest> ratings;
 
 	public Map() {
 		this.tableOfPOIs = new HashMap<>();
+		this.ratings = new TreeSet<>(new POIComparator());
 		this.populateMap();
 		this.populateNeighbors();
 	}
@@ -55,7 +58,9 @@ public class Map {
 				rating = input.nextDouble();
 
 				PointofInterest poi = new PointofInterest(name, type, lat, longit, rating);
+				
 				this.tableOfPOIs.put(poi.getName(), poi);
+				this.ratings.add(poi);
 				count = -1;
 				input.nextLine();
 			}
@@ -72,7 +77,7 @@ public class Map {
 
 			Scanner input = new Scanner(System.in);
 			try {
-				input = new Scanner(new File(this.tableOfPOIs.get(key).getName() + "neighbors"));
+				input = new Scanner(new File(this.tableOfPOIs.get(key).getName() + " neighbors"));
 			} catch (FileNotFoundException exception) {
 				exception.printStackTrace();
 			}

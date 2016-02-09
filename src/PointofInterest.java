@@ -1,7 +1,10 @@
 import java.util.ArrayList;
+import java.util.Enumeration;
+
+import javax.swing.tree.TreeNode;
 
 
-public class PointofInterest {
+public class PointofInterest implements TreeNode {
 	private String name;
 	private String type;
 	private double straightLineDist;
@@ -19,7 +22,7 @@ public class PointofInterest {
 		this.lat = latitude;
 		this.longit = longitude;
 		this.radOfEarth = 3959;
-		this.neighbors = new ArrayList<PointofInterest>();	
+		this.neighbors = new ArrayList<>();	
 	}
 	
 	public String getName(){
@@ -71,6 +74,41 @@ public class PointofInterest {
 	@Override
 	public String toString() {
 		
-		return this.getName() + " " + this.getType() + " " + this.getRating();
+		return this.getName() + " " + this.getRating();
+	}
+
+	@Override
+	public Enumeration children() {
+		return null;
+	}
+
+	@Override
+	public boolean getAllowsChildren() {
+		return false;
+	}
+
+	@Override
+	public TreeNode getChildAt(int childIndex) {
+		return null;
+	}
+
+	@Override
+	public int getChildCount() {
+		return 0;
+	}
+
+	@Override
+	public int getIndex(TreeNode node) {
+		return 0;
+	}
+
+	@Override
+	public TreeNode getParent() {
+		return null;
+	}
+
+	@Override
+	public boolean isLeaf() {
+		return false;
 	}
 }
