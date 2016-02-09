@@ -2,14 +2,14 @@ import java.util.ArrayList;
 
 
 public class PointofInterest {
-	String name;
-	String type;
-	double straightLineDist;
-	double rating;
-	double lat;
-	double longit;
-	double radOfEarth;
-	ArrayList<PointofInterest> neighbors;	
+	private String name;
+	private String type;
+	private double straightLineDist;
+	private double rating;
+	public double lat;
+	public double longit;
+	public double radOfEarth;
+	public ArrayList<PointofInterest> neighbors;	
 	
 	public PointofInterest(String name, String type, double latitude, double longitude, double rating){
 		this.name = name;
@@ -73,6 +73,7 @@ public class PointofInterest {
 		return this.name + " " + this.type + " " + this.lat + " " + this.longit + " " + this.rating;
 	}
 	
+	@Override
 	public String toString() {
 		
 		return this.getName() + " " + this.getType() + " " + this.getRating();

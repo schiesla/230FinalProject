@@ -3,15 +3,20 @@ import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Scanner;
 
-
 public class Map {
 	private HashMap<String, PointofInterest> tableOfPOIs;
 
 	public Map() {
 		this.tableOfPOIs = new HashMap<>();
 		this.populateMap();
+		this.populateNeighbors();
 	}
-	
+
+	/**
+	 * 
+	 * Reads text file with all POIs data and populates the table.
+	 *
+	 */
 	@SuppressWarnings("resource")
 	private void populateMap() {
 		Scanner input = new Scanner(System.in);
@@ -26,31 +31,31 @@ public class Map {
 		double lat = 0;
 		double longit = 0;
 		double rating = 0;
-		
+
 		while (input.hasNextLine()) {
-			
-			if(count == 0) {
-				
+
+			if (count == 0) {
+
 				name = input.nextLine();
-				
-			} else if(count == 1) {
-				
+
+			} else if (count == 1) {
+
 				type = input.nextLine();
-				
-			} else if(count == 2) {
-				
+
+			} else if (count == 2) {
+
 				lat = input.nextDouble();
-				
-			} else if(count == 3) {
-				
+
+			} else if (count == 3) {
+
 				longit = input.nextDouble();
-				
-			} else if(count == 4) {
-				
+
+			} else if (count == 4) {
+
 				rating = input.nextDouble();
-				
+
 				PointofInterest poi = new PointofInterest(name, type, lat, longit, rating);
-				this.tableOfPOIs.put(poi.name, poi);
+				this.tableOfPOIs.put(poi.getName(), poi);
 				count = -1;
 				input.nextLine();
 			}
@@ -58,11 +63,27 @@ public class Map {
 		}
 
 		input.close();
-		
-		for(String key : this.tableOfPOIs.keySet()) {
-		
-			System.out.println(this.tableOfPOIs.get(key).toString());
+	}
+
+	@SuppressWarnings("resource")
+	public void populateNeighbors() {
+
+		for (String key : this.tableOfPOIs.keySet()) {
+
+			Scanner input = new Scanner(System.in);
+			try {
+				input = new Scanner(new File(this.tableOfPOIs.get(key).getName() + "neighbors"));
+			} catch (FileNotFoundException exception) {
+				exception.printStackTrace();
+			}
+
+			while (input.hasNextLine()) {
+
+				String name = input.nextLine();
+				this.tableOfPOIs.get(key).neighbors.add(this.tableOfPOIs.get(name));
+			}
+			
+			input.close();
 		}
 	}
-	
 }
