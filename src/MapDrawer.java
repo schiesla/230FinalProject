@@ -46,9 +46,19 @@ public class MapDrawer extends JComponent {
 	public static void main(String[] args) {
 		PointofInterest p1 = new PointofInterest("Vali Ski Resort", "Resort", 39.6391, 106.3738, 2.5);
 		PointofInterest p2 = new PointofInterest("Rocky Mountain National Park", "Park", 40.3333, 105.7089, 2.6);
+		PointofInterest p3 = new PointofInterest("Pikes Peak", "Park", 38.8405, 105.0442, 3.5);
+		PointofInterest p4 = new PointofInterest("Mount Evans", "Park", 39.5883, 105.6438, 4.1);
+		PointofInterest p5 = new PointofInterest("Canyons of the Ancients National Park", "Park", 37.3706, 109.0000, 1.9);
+		PointofInterest p6 = new PointofInterest("Copper Mountain", "Park", 39.5017, 106.1564, 3.1);
+		PointofInterest p7 = new PointofInterest("Denver", "City", 39.7392, 104.9903, 4.20);
 		HashMap<String, PointofInterest> map = new HashMap<String, PointofInterest>();
 		map.put("Vali Ski Resort", p1);
 		map.put("Rocky Mountain National Park", p2);
+		map.put("Pikes Peak", p3);
+		map.put("Mount Evans", p4);
+		map.put("Canyons of the Ancients National Park", p5);
+		map.put("Copper Mountain", p6);
+		map.put("Denver", p7);
 		JFrame frame = new JFrame();
 		MapDrawer md = new MapDrawer(frame, map);
 	}
@@ -79,5 +89,6 @@ public class MapDrawer extends JComponent {
 			g.setColor(Color.BLACK);
 			g.fill(rect);
 		}
+		g.translate(-FRAME_WIDTH/2.0, -FRAME_HEIGHT/2.0);
 	}
 }
