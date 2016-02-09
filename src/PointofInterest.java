@@ -55,7 +55,6 @@ public class PointofInterest {
 		double a = Math.pow((Math.sin(dlat/2)), 2) + Math.cos(latOne) * Math.cos(latTwo) * Math.pow(Math.sin(dlong/2), 2);
 		double d = 2 * this.radOfEarth * Math.asin(Math.sqrt(a));
 		return d;
-		
 	}
 	
 	public double getLatitude(){
@@ -67,10 +66,6 @@ public class PointofInterest {
 	}
 	public ArrayList<PointofInterest> getNeighbors(){
 		return this.neighbors;
-	}
-	
-	public String bs() {
-		return this.name + " " + this.type + " " + this.lat + " " + this.longit + " " + this.rating;
 	}
 	
 	@Override
