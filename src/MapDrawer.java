@@ -37,16 +37,18 @@ public class MapDrawer extends JComponent {
 	private static final Dimension d = new Dimension();
 	
 	public static void main(String[] args) {
-		PointofInterest p = new PointofInterest("Vali Ski Resort", "Resort", 106.3738, 39.6391, 2.5);
+		PointofInterest p1 = new PointofInterest("Vali Ski Resort", "Resort", 39.6391, 106.3738, 2.5);
+		PointofInterest p2 = new PointofInterest("Rocky Mountain National Park", "Park", 40.3333, 105.7089, 2.6);
 		HashMap<String, PointofInterest> map = new HashMap<String, PointofInterest>();
-		map.put("Vali Ski Resort", p);
+		map.put("Vali Ski Resort", p1);
+		map.put("Rocky Mountain National Park", p2);
 		MapDrawer md = new MapDrawer(map);
 	}
 	
 	public MapDrawer(HashMap<String, PointofInterest> map) {
 		this.map = map;
 		JFrame f = new JFrame();
-		this.d.setSize(WIDTH, HEIGHT);
+		this.d.setSize(WIDTH * 100, HEIGHT * 100);
 		f.setSize(this.d);
 		f.add(this);
 		f.setDefaultCloseOperation(f.EXIT_ON_CLOSE);
@@ -65,7 +67,7 @@ public class MapDrawer extends JComponent {
 			double lat = this.map.get(s).getLatitude();
 			double longit = this.map.get(s).getLongitude();
 			Point2D.Double point = new Point2D.Double(longit - WIDTH/2, lat - HEIGHT/2);
-			Rectangle2D.Double rect = new Rectangle2D.Double(point.x, point.y, 3, 3);
+			Rectangle2D.Double rect = new Rectangle2D.Double(point.x, point.y, 10, 10);
 			g.setColor(Color.BLACK);
 			g.fill(rect);
 		}

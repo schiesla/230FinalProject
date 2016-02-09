@@ -15,7 +15,7 @@ public class PointofInterest implements TreeNode {
 	public double radOfEarth;
 	public ArrayList<PointofInterest> neighbors;	
 	
-	public PointofInterest(String name, String type, double longitude, double latitude, double rating){
+	public PointofInterest(String name, String type, double latitude, double longitude, double rating){
 		this.name = name;
 		this.type = type;
 		this.straightLineDist = 0.0;
