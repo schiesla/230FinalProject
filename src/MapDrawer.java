@@ -81,14 +81,22 @@ public class MapDrawer extends JComponent {
 	
 	public void drawMap(Graphics2D g) {
 		g.translate(FRAME_WIDTH/2.0, FRAME_HEIGHT/2.0);
+		g.rotate(Math.toRadians(180));
 		for (String s : this.map.keySet()) {
+			String type = this.map.get(s).getType();
 			double lat = this.map.get(s).getLatitude();
 			double longit = this.map.get(s).getLongitude();
 			Point2D.Double point = new Point2D.Double(longit - CENTER_LONG, lat - CENTER_LAT);
 			Rectangle2D.Double rect = new Rectangle2D.Double(point.x * FRAME_MULTIPLIER - MAP_RADIUS/2.0, point.y * FRAME_MULTIPLIER - MAP_RADIUS/2.0, MAP_RADIUS, MAP_RADIUS);
-			g.setColor(Color.BLACK);
+			if (type.equals("City"))
+				g.setColor(Color.BLACK);
+			if (type.equals("Resort"))
+				g.setColor(Color.CYAN);
+			if (type.equals("Park"))
+				g.setColor(Color.GREEN);
 			g.fill(rect);
 		}
+		g.rotate(-Math.toRadians(180));
 		g.translate(-FRAME_WIDTH/2.0, -FRAME_HEIGHT/2.0);
 	}
 }
