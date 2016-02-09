@@ -7,12 +7,19 @@ import java.util.TreeSet;
 public class Map {
 	private HashMap<String, PointofInterest> tableOfPOIs;
 	private TreeSet<PointofInterest> ratings;
+	private HashMap<Integer, Connection> connections;
 
 	public Map() {
 		this.tableOfPOIs = new HashMap<>();
 		this.ratings = new TreeSet<>(new POIComparator());
+		this.connections = new HashMap<>();
 		this.populateMap();
 		this.populateNeighbors();
+		
+		for(Integer key : this.connections.keySet()) {
+			
+			System.out.println(this.connections.get(key).toString());
+		}
 	}
 
 	/**
@@ -81,9 +88,11 @@ public class Map {
 
 		for (String key : this.tableOfPOIs.keySet()) {
 
+			PointofInterest temp = this.tableOfPOIs.get(key);
+
 			Scanner input = new Scanner(System.in);
 			try {
-				input = new Scanner(new File(this.tableOfPOIs.get(key).getName() + " neighbors"));
+				input = new Scanner(new File(temp.getName() + " neighbors"));
 			} catch (FileNotFoundException exception) {
 				exception.printStackTrace();
 			}
@@ -91,10 +100,33 @@ public class Map {
 			while (input.hasNextLine()) {
 
 				String name = input.nextLine();
-				this.tableOfPOIs.get(key).neighbors.add(this.tableOfPOIs.get(name));
+				temp.neighbors.add(this.tableOfPOIs.get(name));
+				int hashKey = this.hashCode(temp.getName() + name);
+						
+				if (!(this.connections.containsKey(hashKey))) {
+
+					Connection con = new Connection(temp, this.tableOfPOIs.get(name));
+
+					this.connections.put(hashKey, con);
+				}
 			}
 
 			input.close();
 		}
+	}
+	
+	public int hashCode(String key) {
+		
+		int val = 0;
+		
+		for(char c : key.toCharArray()) {
+			
+			val += c;
+		}
+		
+		val %= key.length();
+		
+		return val;
+		
 	}
 }

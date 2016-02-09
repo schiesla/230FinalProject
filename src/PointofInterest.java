@@ -1,3 +1,4 @@
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Enumeration;
 
@@ -40,14 +41,16 @@ public class PointofInterest implements TreeNode {
 	public double getRating(){
 		return this.rating;
 	}
+	
 	/**
 	 * 
-	 * takes the lat and lon of two Points of Interest and calculates the distance in miles 
+	 * Takes the lat and lon of two Points of Interest and calculates the distance in miles 
 	 * between the two places. Formula aquired from https://en.wikipedia.org/wiki/Haversine_formula
 	 *
 	 * @param neighbor
 	 * @return distance in miles
 	 */
+	@SuppressWarnings("boxing")
 	public double DistToNeighbor(PointofInterest neighbor){
 		double latTwo = ((neighbor.lat * 3.14)/180.0);
 		double latOne = ((this.lat * 3.14)/180.0);
@@ -57,6 +60,9 @@ public class PointofInterest implements TreeNode {
 		double dlat =  latTwo - latOne;
 		double a = Math.pow((Math.sin(dlat/2)), 2) + Math.cos(latOne) * Math.cos(latTwo) * Math.pow(Math.sin(dlong/2), 2);
 		double d = 2 * this.radOfEarth * Math.asin(Math.sqrt(a));
+		DecimalFormat df = new DecimalFormat("#.##");
+		d = Double.valueOf(df.format(d));
+		
 		return d;
 	}
 	
@@ -74,7 +80,7 @@ public class PointofInterest implements TreeNode {
 	@Override
 	public String toString() {
 		
-		return this.getName() + " " + this.getRating();
+		return this.getName();
 	}
 
 	@Override
