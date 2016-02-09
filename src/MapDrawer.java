@@ -36,6 +36,13 @@ public class MapDrawer extends JComponent {
 	private static final double HEIGHT = TOP_LEFT_CORNER.y - BOTTOM_RIGHT_CORNER.y;
 	private static final Dimension d = new Dimension();
 	
+	public static void main(String[] args) {
+		PointofInterest p = new PointofInterest("Vali Ski Resort", "Resort", 106.3738, 39.6391, 2.5);
+		HashMap<String, PointofInterest> map = new HashMap<String, PointofInterest>();
+		map.put("Vali Ski Resort", p);
+		MapDrawer md = new MapDrawer(map);
+	}
+	
 	public MapDrawer(HashMap<String, PointofInterest> map) {
 		this.map = map;
 		JFrame f = new JFrame();
