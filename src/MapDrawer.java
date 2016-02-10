@@ -1,13 +1,20 @@
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GridLayout;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.util.HashMap;
 
+import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 
 public class MapDrawer extends JComponent {
@@ -33,15 +40,15 @@ public class MapDrawer extends JComponent {
 	private static final double CENTER_LAT = (TOP_LEFT_CORNER_LAT + BOTTOM_RIGHT_CORNER_LAT)/2.0;
 	private static final double CENTER_LONG = (TOP_LEFT_CORNER_LONG + BOTTOM_RIGHT_CORNER_LONG)/2.0;
 	
-	private static final double WIDTH = TOP_LEFT_CORNER.x - BOTTOM_RIGHT_CORNER.x;
-	private static final double HEIGHT = TOP_LEFT_CORNER.y - BOTTOM_RIGHT_CORNER.y;
+	private static final double WIDTH = TOP_LEFT_CORNER.x - TOP_RIGHT_CORNER.x;
+	private static final double HEIGHT = TOP_LEFT_CORNER.y - BOTTOM_LEFT_CORNER.y;
 	private static final Dimension d = new Dimension();
 	
 	private static final double FRAME_MULTIPLIER = 100;
 	private static final double MAP_RADIUS = 10;
 	
 	private static final double FRAME_WIDTH = WIDTH * FRAME_MULTIPLIER;
-	private static final double FRAME_HEIGHT = HEIGHT * FRAME_MULTIPLIER;
+	private static final double FRAME_HEIGHT = HEIGHT * FRAME_MULTIPLIER + 20;
 	
 	public static void main(String[] args) {
 		PointofInterest p1 = new PointofInterest("Vali Ski Resort", "Resort", 39.6391, 106.3738, 2.5);
@@ -63,12 +70,37 @@ public class MapDrawer extends JComponent {
 		MapDrawer md = new MapDrawer(frame, map);
 	}
 	
-	public MapDrawer(JFrame frame, HashMap<String, PointofInterest> map) {
+	public MapDrawer(JFrame f, HashMap<String, PointofInterest> map) {
 		this.map = map;
-		JFrame f = new JFrame();
 		this.d.setSize(FRAME_WIDTH, FRAME_HEIGHT);
 		f.setSize(this.d);
 		f.add(this);
+		JPanel t = new JPanel();
+		JLabel title = new JLabel("Map Brothers Colorado Navigation");
+		title.setFont(new Font("Bauhaus 93", Font.PLAIN, 32));
+		t.add(title);
+		JPanel b = new JPanel();
+		b.setLayout(new GridLayout(3,3,10,2));
+		JLabel to = new JLabel("Destination:");
+		JLabel from = new JLabel("Location:");
+		JTextField toTxt = new JTextField();
+		JTextField fromTxt = new JTextField();
+		JButton route = new JButton("Find Route!");
+		b.add(from);
+		b.add(fromTxt);
+		b.add(to);
+		b.add(toTxt);
+		b.add(route);
+		JPanel r = new JPanel();
+		JTextField waypoint = new JTextField();
+		JButton wpButton = new JButton("Add Waypoint");
+		JButton search = new JButton("Search by Rating");
+		r.add(waypoint);
+		r.add(wpButton);
+		r.add(search);
+		f.add(t, BorderLayout.NORTH);
+		f.add(b, BorderLayout.SOUTH);
+		f.add(r, BorderLayout.EAST);
 		f.setDefaultCloseOperation(f.EXIT_ON_CLOSE);
 		f.setVisible(true);
 	}

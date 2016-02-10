@@ -129,4 +129,7 @@ public class Map {
 		return val;
 		
 	}
+	public HashMap<String, PointofInterest> getTablePOIs(){
+		return this.tableOfPOIs;
+	}
 }
