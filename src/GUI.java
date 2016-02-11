@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSplitPane;
 import javax.swing.JTextField;
 
 
@@ -19,7 +20,7 @@ public class GUI implements MouseListener {
 	public GUI(Map mapFile) {
 		this.mapFile = mapFile;
 		this.frame = new JFrame();
-		this.graph = new MapDrawer(this.frame, this.mapFile.getTablePOIs());
+		this.graph = null;
 		this.setUpPanels();
 		
 	}
@@ -28,6 +29,8 @@ public class GUI implements MouseListener {
 		JLabel title = new JLabel("Map Brothers Colorado Navigation");
 		title.setFont(new Font("Bauhaus 93", Font.PLAIN, 32));
 		t.add(title);
+		JPanel c = new JPanel();
+		this.graph = new MapDrawer(c, this.mapFile.getTablePOIs());
 		JPanel b = new JPanel();
 		b.setLayout(new GridLayout(3,3,10,2));
 		JLabel to = new JLabel("Destination:");
@@ -47,10 +50,16 @@ public class GUI implements MouseListener {
 		r.add(waypoint);
 		r.add(wpButton);
 		r.add(search);
+		this.frame.add(c, BorderLayout.CENTER);
 		this.frame.add(t, BorderLayout.NORTH);
 		this.frame.add(b, BorderLayout.SOUTH);
 		this.frame.add(r, BorderLayout.EAST);
-		this.frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
+		JSplitPane sp = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, c, r);
+		sp.setOneTouchExpandable(true);
+		sp.setDividerLocation(600);
+		this.frame.add(sp);
+		this.frame.setSize(1000, 800);
+		this.frame.setDefaultCloseOperation(this.frame.EXIT_ON_CLOSE);
 		this.frame.setVisible(true);
 	}
 	

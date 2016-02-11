@@ -1,25 +1,19 @@
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.GridLayout;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.util.HashMap;
 
-import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 
 public class MapDrawer extends JComponent {
 	
 	private HashMap<String, PointofInterest> map;
+	public JPanel panel;
 	
 	private static final double TOP_LEFT_CORNER_LAT = 41.0007;
 	private static final double TOP_LEFT_CORNER_LONG = 109.0501;
@@ -48,64 +42,43 @@ public class MapDrawer extends JComponent {
 	private static final double MAP_RADIUS = 10;
 	
 	private static final double FRAME_WIDTH = WIDTH * FRAME_MULTIPLIER;
-	private static final double FRAME_HEIGHT = HEIGHT * FRAME_MULTIPLIER + 20;
+	private static final double FRAME_HEIGHT = HEIGHT * FRAME_MULTIPLIER;
 	
-	public static void main(String[] args) {
-		PointofInterest p1 = new PointofInterest("Vali Ski Resort", "Resort", 39.6391, 106.3738, 2.5);
-		PointofInterest p2 = new PointofInterest("Rocky Mountain National Park", "Park", 40.3333, 105.7089, 2.6);
-		PointofInterest p3 = new PointofInterest("Pikes Peak", "Park", 38.8405, 105.0442, 3.5);
-		PointofInterest p4 = new PointofInterest("Mount Evans", "Park", 39.5883, 105.6438, 4.1);
-		PointofInterest p5 = new PointofInterest("Canyons of the Ancients National Park", "Park", 37.3706, 109.0000, 1.9);
-		PointofInterest p6 = new PointofInterest("Copper Mountain", "Park", 39.5017, 106.1564, 3.1);
-		PointofInterest p7 = new PointofInterest("Denver", "City", 39.7392, 104.9903, 4.20);
-		HashMap<String, PointofInterest> map = new HashMap<String, PointofInterest>();
-		map.put("Vali Ski Resort", p1);
-		map.put("Rocky Mountain National Park", p2);
-		map.put("Pikes Peak", p3);
-		map.put("Mount Evans", p4);
-		map.put("Canyons of the Ancients National Park", p5);
-		map.put("Copper Mountain", p6);
-		map.put("Denver", p7);
-		JFrame frame = new JFrame();
-		MapDrawer md = new MapDrawer(frame, map);
-	}
+//	public static void main(String[] args) {
+//		PointofInterest p1 = new PointofInterest("Vali Ski Resort", "Resort", 39.6391, 106.3738, 2.5);
+//		PointofInterest p2 = new PointofInterest("Rocky Mountain National Park", "Park", 40.3333, 105.7089, 2.6);
+//		PointofInterest p3 = new PointofInterest("Pikes Peak", "Park", 38.8405, 105.0442, 3.5);
+//		PointofInterest p4 = new PointofInterest("Mount Evans", "Park", 39.5883, 105.6438, 4.1);
+//		PointofInterest p5 = new PointofInterest("Canyons of the Ancients National Park", "Park", 37.3706, 109.0000, 1.9);
+//		PointofInterest p6 = new PointofInterest("Copper Mountain", "Park", 39.5017, 106.1564, 3.1);
+//		PointofInterest p7 = new PointofInterest("Denver", "City", 39.7392, 104.9903, 4.20);
+//		HashMap<String, PointofInterest> map = new HashMap<String, PointofInterest>();
+//		map.put("Vali Ski Resort", p1);
+//		map.put("Rocky Mountain National Park", p2);
+//		map.put("Pikes Peak", p3);
+//		map.put("Mount Evans", p4);
+//		map.put("Canyons of the Ancients National Park", p5);
+//		map.put("Copper Mountain", p6);
+//		map.put("Denver", p7);
+//		JFrame frame = new JFrame();
+//		MapDrawer md = new MapDrawer(frame, map);
+//	}
 	
-	public MapDrawer(JFrame f, HashMap<String, PointofInterest> map) {
+	public MapDrawer(JPanel panel, HashMap<String, PointofInterest> map) {
+		this.panel = panel;
+//		JButton hi = new JButton("test");
+//		this.panel.add(hi);
 		this.map = map;
 		this.d.setSize(FRAME_WIDTH, FRAME_HEIGHT);
-		f.setSize(this.d);
-		f.add(this);
-		JPanel t = new JPanel();
-		JLabel title = new JLabel("Map Brothers Colorado Navigation");
-		title.setFont(new Font("Bauhaus 93", Font.PLAIN, 32));
-		t.add(title);
-		JPanel b = new JPanel();
-		b.setLayout(new GridLayout(3,3,10,2));
-		JLabel to = new JLabel("Destination:");
-		JLabel from = new JLabel("Location:");
-		JTextField toTxt = new JTextField();
-		JTextField fromTxt = new JTextField();
-		JButton route = new JButton("Find Route!");
-		b.add(from);
-		b.add(fromTxt);
-		b.add(to);
-		b.add(toTxt);
-		b.add(route);
-		JPanel r = new JPanel();
-		JTextField waypoint = new JTextField();
-		JButton wpButton = new JButton("Add Waypoint");
-		JButton search = new JButton("Search by Rating");
-		r.add(waypoint);
-		r.add(wpButton);
-		r.add(search);
-		f.add(t, BorderLayout.NORTH);
-		f.add(b, BorderLayout.SOUTH);
-		f.add(r, BorderLayout.EAST);
-		f.setDefaultCloseOperation(f.EXIT_ON_CLOSE);
-		f.setVisible(true);
+		this.panel.add(this);
+		this.panel.setSize(this.d);
+//		f.setSize(this.d);
+//		f.add(this);
+		
 	}
 	
 	public void paintComponent(Graphics g) {
+		System.out.println("its drawing");
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
 		this.drawMap(g2);
@@ -115,7 +88,9 @@ public class MapDrawer extends JComponent {
 		g.translate(FRAME_WIDTH/2.0, FRAME_HEIGHT/2.0);
 		g.rotate(Math.toRadians(180));
 		for (String s : this.map.keySet()) {
+//			System.out.println(s);
 			String type = this.map.get(s).getType();
+//			System.out.println(type);
 			double lat = this.map.get(s).getLatitude();
 			double longit = this.map.get(s).getLongitude();
 			Point2D.Double point = new Point2D.Double(longit - CENTER_LONG, lat - CENTER_LAT);
@@ -123,6 +98,7 @@ public class MapDrawer extends JComponent {
 			if (type.equals("City"))
 				g.setColor(Color.BLACK);
 			if (type.equals("Resort"))
+//				System.out.println("resort");
 				g.setColor(Color.CYAN);
 			if (type.equals("Park"))
 				g.setColor(Color.GREEN);
