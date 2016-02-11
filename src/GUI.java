@@ -1,26 +1,21 @@
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JSplitPane;
 import javax.swing.JTextField;
 
 
-public class GUI implements MouseListener {
+public class GUI extends JFrame {
 	private Map mapFile;
-	private JFrame frame;
-	private MapDrawer graph;
+	private JPanel graph;
 	
 	public GUI(Map mapFile) {
 		this.mapFile = mapFile;
-		this.frame = new JFrame();
-		this.graph = null;
+		this.graph = new MapDrawer(this.mapFile.getTablePOIs());
 		this.setUpPanels();
 		
 	}
@@ -29,8 +24,8 @@ public class GUI implements MouseListener {
 		JLabel title = new JLabel("Map Brothers Colorado Navigation");
 		title.setFont(new Font("Bauhaus 93", Font.PLAIN, 32));
 		t.add(title);
-		JPanel c = new JPanel();
-		this.graph = new MapDrawer(c, this.mapFile.getTablePOIs());
+//		JPanel c = new JPanel();
+//		this.graph = new MapDrawer(c, this.mapFile.getTablePOIs());
 		JPanel b = new JPanel();
 		b.setLayout(new GridLayout(3,3,10,2));
 		JLabel to = new JLabel("Destination:");
@@ -50,50 +45,19 @@ public class GUI implements MouseListener {
 		r.add(waypoint);
 		r.add(wpButton);
 		r.add(search);
-		this.frame.add(c, BorderLayout.CENTER);
-		this.frame.add(t, BorderLayout.NORTH);
-		this.frame.add(b, BorderLayout.SOUTH);
-		this.frame.add(r, BorderLayout.EAST);
-		JSplitPane sp = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, c, r);
-		sp.setOneTouchExpandable(true);
-		sp.setDividerLocation(600);
-		this.frame.add(sp);
-		this.frame.setSize(1000, 800);
-		this.frame.setDefaultCloseOperation(this.frame.EXIT_ON_CLOSE);
-		this.frame.setVisible(true);
-	}
-	
-	
-	
-	@Override
-	public void mouseClicked(MouseEvent arg0) {
-		// TODO Auto-generated method stub.
-		
+//		this.frame.add(c, BorderLayout.CENTER);
+		this.add(t, BorderLayout.NORTH);
+		this.add(b, BorderLayout.SOUTH);
+		this.add(r, BorderLayout.EAST);
+//		JSplitPane sp = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, c, r);
+//		sp.setOneTouchExpandable(true);
+//		sp.setDividerLocation(600);
+//		this.frame.add(sp);
+		this.setSize(1000, 800);
+		this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
+		this.setVisible(true);
 	}
 
-	@Override
-	public void mouseEntered(MouseEvent arg0) {
-		// TODO Auto-generated method stub.
-		
-	}
-
-	@Override
-	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub.
-		
-	}
-
-	@Override
-	public void mousePressed(MouseEvent arg0) {
-		// TODO Auto-generated method stub.
-		
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent arg0) {
-		// TODO Auto-generated method stub.
-		
-	}
 	
 	
 }

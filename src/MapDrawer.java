@@ -6,14 +6,12 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.util.HashMap;
 
-import javax.swing.JComponent;
 import javax.swing.JPanel;
 
 
-public class MapDrawer extends JComponent {
+public class MapDrawer extends JPanel {
 	
 	private HashMap<String, PointofInterest> map;
-	public JPanel panel;
 	
 	private static final double TOP_LEFT_CORNER_LAT = 41.0007;
 	private static final double TOP_LEFT_CORNER_LONG = 109.0501;
@@ -64,14 +62,12 @@ public class MapDrawer extends JComponent {
 //		MapDrawer md = new MapDrawer(frame, map);
 //	}
 	
-	public MapDrawer(JPanel panel, HashMap<String, PointofInterest> map) {
-		this.panel = panel;
+	public MapDrawer(HashMap<String, PointofInterest> map) {
 //		JButton hi = new JButton("test");
 //		this.panel.add(hi);
 		this.map = map;
 		this.d.setSize(FRAME_WIDTH, FRAME_HEIGHT);
-		this.panel.add(this);
-		this.panel.setSize(this.d);
+		setPreferredSize(this.d);
 //		f.setSize(this.d);
 //		f.add(this);
 		
