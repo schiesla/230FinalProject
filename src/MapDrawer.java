@@ -2,6 +2,9 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Shape;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.util.HashMap;
@@ -9,7 +12,7 @@ import java.util.HashMap;
 import javax.swing.JPanel;
 
 
-public class MapDrawer extends JPanel {
+public class MapDrawer extends JPanel implements MouseListener {
 	
 	private HashMap<String, PointofInterest> map;
 	
@@ -42,6 +45,8 @@ public class MapDrawer extends JPanel {
 	private static final double FRAME_WIDTH = WIDTH * FRAME_MULTIPLIER;
 	private static final double FRAME_HEIGHT = HEIGHT * FRAME_MULTIPLIER;
 	
+	private HashMap<Shape, PointofInterest> shapes = new HashMap<Shape, PointofInterest>();
+	
 //	public static void main(String[] args) {
 //		PointofInterest p1 = new PointofInterest("Vali Ski Resort", "Resort", 39.6391, 106.3738, 2.5);
 //		PointofInterest p2 = new PointofInterest("Rocky Mountain National Park", "Park", 40.3333, 105.7089, 2.6);
@@ -70,7 +75,7 @@ public class MapDrawer extends JPanel {
 		setPreferredSize(this.d);
 //		f.setSize(this.d);
 //		f.add(this);
-		
+		this.addMouseListener(this);
 	}
 	
 	public void paintComponent(Graphics g) {
@@ -81,20 +86,21 @@ public class MapDrawer extends JPanel {
 	}
 	
 	public void drawMap(Graphics2D g) {
+		Rectangle2D.Double outline = new Rectangle2D.Double(0, 0, FRAME_WIDTH, FRAME_HEIGHT);
+		g.draw(outline);
 		g.translate(FRAME_WIDTH/2.0, FRAME_HEIGHT/2.0);
 		g.rotate(Math.toRadians(180));
 		for (String s : this.map.keySet()) {
-//			System.out.println(s);
 			String type = this.map.get(s).getType();
-//			System.out.println(type);
 			double lat = this.map.get(s).getLatitude();
 			double longit = this.map.get(s).getLongitude();
 			Point2D.Double point = new Point2D.Double(longit - CENTER_LONG, lat - CENTER_LAT);
 			Rectangle2D.Double rect = new Rectangle2D.Double(point.x * FRAME_MULTIPLIER - MAP_RADIUS/2.0, point.y * FRAME_MULTIPLIER - MAP_RADIUS/2.0, MAP_RADIUS, MAP_RADIUS);
+			this.shapes.put(rect, this.map.get(s));
+			System.out.println(this.map.get(s).getName() + ": " + rect.x + " " + rect.y);
 			if (type.equals("City"))
 				g.setColor(Color.BLACK);
 			if (type.equals("Resort"))
-//				System.out.println("resort");
 				g.setColor(Color.CYAN);
 			if (type.equals("Park"))
 				g.setColor(Color.GREEN);
@@ -102,5 +108,47 @@ public class MapDrawer extends JPanel {
 		}
 		g.rotate(-Math.toRadians(180));
 		g.translate(-FRAME_WIDTH/2.0, -FRAME_HEIGHT/2.0);
+	}
+	
+//	private Shape nearestPOI(Point2D point) {
+//		for(Shape s : this.shapes.keySet()) {
+//			double distance = point.distance(s.)
+//		}
+//	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		System.out.println("Should print");
+		System.out.println(e.getX() + "");
+		System.out.println(e.getY() + "");
+		for(Shape s : this.shapes.keySet()) {
+			if (s.contains((e.getX() - CENTER_LONG) * FRAME_MULTIPLIER, (e.getY() - CENTER_LAT) * FRAME_MULTIPLIER)) {
+				System.out.println(this.shapes.get(s).getName());
+			}
+		}
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		// TODO Auto-generated method stub.
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Auto-generated method stub.
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		// TODO Auto-generated method stub.
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub.
+		
 	}
 }
