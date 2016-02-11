@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
 
@@ -6,6 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSplitPane;
 import javax.swing.JTextField;
 
 
@@ -20,12 +22,12 @@ public class GUI extends JFrame {
 		
 	}
 	private void setUpPanels(){
+		this.graph.setBackground(Color.GRAY);
+		this.add(this.graph);
 		JPanel t = new JPanel();
 		JLabel title = new JLabel("Map Brothers Colorado Navigation");
 		title.setFont(new Font("Bauhaus 93", Font.PLAIN, 32));
 		t.add(title);
-//		JPanel c = new JPanel();
-//		this.graph = new MapDrawer(c, this.mapFile.getTablePOIs());
 		JPanel b = new JPanel();
 		b.setLayout(new GridLayout(3,3,10,2));
 		JLabel to = new JLabel("Destination:");
@@ -45,14 +47,13 @@ public class GUI extends JFrame {
 		r.add(waypoint);
 		r.add(wpButton);
 		r.add(search);
-//		this.frame.add(c, BorderLayout.CENTER);
 		this.add(t, BorderLayout.NORTH);
 		this.add(b, BorderLayout.SOUTH);
 		this.add(r, BorderLayout.EAST);
-//		JSplitPane sp = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, c, r);
-//		sp.setOneTouchExpandable(true);
-//		sp.setDividerLocation(600);
-//		this.frame.add(sp);
+		JSplitPane sp = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, this.graph, r);
+		sp.setOneTouchExpandable(true);
+		sp.setDividerLocation(600);
+		this.add(sp);
 		this.setSize(1000, 800);
 		this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
 		this.setVisible(true);
