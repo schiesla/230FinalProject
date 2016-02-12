@@ -11,10 +11,9 @@ import java.util.HashMap;
 
 import javax.swing.JPanel;
 
-
 public class MapDrawer extends JPanel implements MouseListener {
 	
-	private HashMap<String, PointofInterest> map;
+	private HashMap<String, Map.PointofInterest> map;
 	
 	private static final double TOP_LEFT_CORNER_LAT = 41.0007;
 	private static final double TOP_LEFT_CORNER_LONG = 109.0501;
@@ -45,7 +44,7 @@ public class MapDrawer extends JPanel implements MouseListener {
 	private static final double FRAME_WIDTH = WIDTH * FRAME_MULTIPLIER;
 	private static final double FRAME_HEIGHT = HEIGHT * FRAME_MULTIPLIER;
 	
-	private HashMap<Shape, PointofInterest> shapes = new HashMap<Shape, PointofInterest>();
+	private HashMap<Shape, Map.PointofInterest> shapes = new HashMap<Shape, Map.PointofInterest>();
 	
 //	public static void main(String[] args) {
 //		PointofInterest p1 = new PointofInterest("Vali Ski Resort", "Resort", 39.6391, 106.3738, 2.5);
@@ -67,7 +66,8 @@ public class MapDrawer extends JPanel implements MouseListener {
 //		MapDrawer md = new MapDrawer(frame, map);
 //	}
 	
-	public MapDrawer(HashMap<String, PointofInterest> map) {
+	public MapDrawer(HashMap<String, Map.PointofInterest> map) {
+
 //		JButton hi = new JButton("test");
 //		this.panel.add(hi);
 		this.map = map;
@@ -90,7 +90,7 @@ public class MapDrawer extends JPanel implements MouseListener {
 		g.draw(outline);
 		g.translate(FRAME_WIDTH/2.0, FRAME_HEIGHT/2.0);
 		g.rotate(Math.toRadians(180));
-		for (String s : this.map.keySet()) {
+		for (Object s : this.map.keySet()) {
 			String type = this.map.get(s).getType();
 			double lat = this.map.get(s).getLatitude();
 			double longit = this.map.get(s).getLongitude();
