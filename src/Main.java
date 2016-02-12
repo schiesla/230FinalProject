@@ -4,8 +4,8 @@ public class Main {
 		System.out.println("Begin!");
 		Map map = new Map();
 		GUI gui = new GUI(map);
-		GUITrial guiTrial = new GUITrial();
-		guiTrial.draw();
+//		GUITrial guiTrial = new GUITrial();
+//		guiTrial.draw();
 		
 		for(String name : map.getTablePOIs().keySet()) {
 			
