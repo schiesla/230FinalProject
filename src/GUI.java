@@ -1,6 +1,7 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,10 +29,9 @@ public class GUI extends JFrame {
 		this.add(this.graph);
 		JPanel t = this.topPanel();
 		JPanel b = this.bottomPanel();
-		JPanel r = this.rightPanel();
-		JSplitPane sp = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, this.graph, r);
+		JSplitPane sp = new JSplitPane(JSplitPane.VERTICAL_SPLIT, this.graph, b);
 		sp.setOneTouchExpandable(true);
-		sp.setDividerLocation(800);
+		sp.setDividerLocation(600);
 		this.add(sp);
 		this.setSize(1000, 800);
 		this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
@@ -46,46 +46,78 @@ public class GUI extends JFrame {
 		t.add(title);
 		this.add(t, BorderLayout.NORTH);
 		return t;
-		
 	}
-	private JPanel rightPanel() {
-		JPanel r = new JPanel();
-//		r.setLayout(new GridLayout(3,1,0, 10));
+	
+	private JPanel bottomPanel(){
+		GridBagLayout layout = new GridBagLayout();
+		JPanel r = new JPanel(layout);
 		JTextField waypoint = new JTextField();
 		JButton wpButton = new JButton("Add Waypoint");
-		wpButton.setSize(100, 50);
+		ActionListener wpListener = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				System.out.println("Waypoint");
+			}
+		};
+		wpButton.addActionListener(wpListener);
 		JButton search = new JButton("Search by Rating");
-		r.add(waypoint);
-		r.add(wpButton);
-		r.add(search);
-		this.add(r, BorderLayout.EAST);
-		return r;
-		
-	}
-	private JPanel bottomPanel(){
-		JPanel b = new JPanel();
-		GridBagLayout layout = new GridBagLayout();
-		b.setLayout(layout);
+		ActionListener searchListener = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Search");		
+			}	
+		};
+		search.addActionListener(searchListener);
+		JPanel b = new JPanel(layout);
 		JLabel to = new JLabel("Destination:");
 		JLabel from = new JLabel("Location:");
 		JTextField toTxt = new JTextField();
 		JTextField fromTxt = new JTextField();
 		JButton route = new JButton("Find Route!");
 		ActionListener routeButton = new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("Route");
-				
-			}
-			
+				System.out.println("Route");	
+			}	
 		};
 		route.addActionListener(routeButton);
-		b.add(from, layout);
-		b.add(fromTxt, layout);
-		b.add(to, layout);
-		b.add(toTxt, layout);
-		b.add(route, layout);
+		GridBagConstraints c = new GridBagConstraints();
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridx = 0;
+		c.gridy = 0;
+		b.add(waypoint, c);
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridx = 0;
+		c.gridy = 1;
+		b.add(wpButton, c);
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridx = 0;
+		c.gridy = 2;
+		b.add(search, c);
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridx = 1;
+		c.gridy = 0;
+		b.add(from, c);
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridx = 2;
+		c.gridy = 0;
+		c.ipadx = 100;
+		b.add(fromTxt, c);
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridx = 1;
+		c.gridy = 1;
+		c.ipadx = 0;
+		b.add(to, c);
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridx = 2;
+		c.gridy = 1;
+		c.ipadx = 100;
+		b.add(toTxt, c);
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridx = 2;
+		c.gridy = 2;
+		c.ipadx = 0;
+		b.add(route, c);
 		this.add(b, BorderLayout.SOUTH);
 		return b;
 		
