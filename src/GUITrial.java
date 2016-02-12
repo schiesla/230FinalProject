@@ -26,6 +26,14 @@ public class GUITrial extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
+        Title = new javax.swing.JPanel();
+        TitleText = new javax.swing.JLabel();
+        jSplitPane3 = new javax.swing.JSplitPane();
+        Map = new javax.swing.JPanel();
+        SearchByRatingButton = new javax.swing.JButton();
+        AddWaypointButton = new javax.swing.JButton();
+        WaypointTextInput = new javax.swing.JTextField();
+        RatingTextInput = new javax.swing.JTextField();
         Navigation = new javax.swing.JPanel();
         LocationLabel = new javax.swing.JLabel();
         DestinationLabel = new javax.swing.JLabel();
@@ -33,16 +41,99 @@ public class GUITrial extends javax.swing.JFrame {
         FindRouteButton = new javax.swing.JButton();
         LocationTextInput = new javax.swing.JTextField();
         DestinationTextInput = new javax.swing.JTextField();
-        Map = new javax.swing.JPanel();
-        SearchByRatingButton = new javax.swing.JButton();
-        AddWaypointButton = new javax.swing.JButton();
-        WaypointTextInput = new javax.swing.JTextField();
-        RatingTextInput = new javax.swing.JTextField();
-        Title = new javax.swing.JPanel();
-        TitleText = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Map");
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setPreferredSize(new java.awt.Dimension(890, 490));
+
+        Title.setBackground(new java.awt.Color(0, 102, 255));
+
+        TitleText.setBackground(new java.awt.Color(255, 255, 255));
+        TitleText.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 24)); // NOI18N
+        TitleText.setForeground(new java.awt.Color(239, 77, 55));
+        TitleText.setText("                                 MapBrothers Colorado Navigation");
+        TitleText.setToolTipText("");
+
+        javax.swing.GroupLayout TitleLayout = new javax.swing.GroupLayout(Title);
+        Title.setLayout(TitleLayout);
+        TitleLayout.setHorizontalGroup(
+            TitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(TitleLayout.createSequentialGroup()
+                .addGap(74, 74, 74)
+                .addComponent(TitleText, javax.swing.GroupLayout.PREFERRED_SIZE, 669, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        TitleLayout.setVerticalGroup(
+            TitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TitleLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(TitleText)
+                .addContainerGap())
+        );
+
+        jSplitPane3.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+
+        SearchByRatingButton.setBackground(new java.awt.Color(0, 204, 0));
+        SearchByRatingButton.setForeground(new java.awt.Color(0, 102, 0));
+        SearchByRatingButton.setText("Search by Rating");
+        SearchByRatingButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SearchByRatingButtonActionPerformed(evt);
+            }
+        });
+
+        AddWaypointButton.setBackground(new java.awt.Color(0, 204, 0));
+        AddWaypointButton.setForeground(new java.awt.Color(0, 102, 0));
+        AddWaypointButton.setText("Add Waypoint");
+        AddWaypointButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddWaypointButtonActionPerformed(evt);
+            }
+        });
+
+        WaypointTextInput.setBackground(new java.awt.Color(0, 102, 0));
+        WaypointTextInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                WaypointTextInputActionPerformed(evt);
+            }
+        });
+
+        RatingTextInput.setBackground(new java.awt.Color(0, 102, 0));
+
+        javax.swing.GroupLayout MapLayout = new javax.swing.GroupLayout(Map);
+        Map.setLayout(MapLayout);
+        MapLayout.setHorizontalGroup(
+            MapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MapLayout.createSequentialGroup()
+                .addContainerGap(742, Short.MAX_VALUE)
+                .addGroup(MapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(RatingTextInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(MapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(AddWaypointButton, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(WaypointTextInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(SearchByRatingButton))))
+                .addContainerGap())
+        );
+
+        MapLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {AddWaypointButton, RatingTextInput, SearchByRatingButton, WaypointTextInput});
+
+        MapLayout.setVerticalGroup(
+            MapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MapLayout.createSequentialGroup()
+                .addContainerGap(130, Short.MAX_VALUE)
+                .addComponent(AddWaypointButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(WaypointTextInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(SearchByRatingButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(RatingTextInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        jSplitPane3.setTopComponent(Map);
 
         Navigation.setBackground(new java.awt.Color(51, 102, 255));
 
@@ -83,7 +174,7 @@ public class GUITrial extends javax.swing.JFrame {
                     .addGroup(NavigationLayout.createSequentialGroup()
                         .addComponent(LocationLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(LocationTextInput))
+                        .addComponent(LocationTextInput, javax.swing.GroupLayout.DEFAULT_SIZE, 775, Short.MAX_VALUE))
                     .addGroup(NavigationLayout.createSequentialGroup()
                         .addComponent(DestinationLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -115,105 +206,25 @@ public class GUITrial extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        SearchByRatingButton.setForeground(new java.awt.Color(0, 102, 0));
-        SearchByRatingButton.setText("Search by Rating");
-        SearchByRatingButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SearchByRatingButtonActionPerformed(evt);
-            }
-        });
-
-        AddWaypointButton.setBackground(new java.awt.Color(255, 255, 255));
-        AddWaypointButton.setForeground(new java.awt.Color(0, 102, 0));
-        AddWaypointButton.setText("Add Waypoint");
-        AddWaypointButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AddWaypointButtonActionPerformed(evt);
-            }
-        });
-
-        WaypointTextInput.setBackground(new java.awt.Color(0, 102, 0));
-        WaypointTextInput.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                WaypointTextInputActionPerformed(evt);
-            }
-        });
-
-        RatingTextInput.setBackground(new java.awt.Color(0, 102, 0));
-
-        javax.swing.GroupLayout MapLayout = new javax.swing.GroupLayout(Map);
-        Map.setLayout(MapLayout);
-        MapLayout.setHorizontalGroup(
-            MapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MapLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(MapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(RatingTextInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(MapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(AddWaypointButton, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(WaypointTextInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(SearchByRatingButton))))
-                .addContainerGap())
-        );
-
-        MapLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {AddWaypointButton, RatingTextInput, SearchByRatingButton, WaypointTextInput});
-
-        MapLayout.setVerticalGroup(
-            MapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MapLayout.createSequentialGroup()
-                .addContainerGap(110, Short.MAX_VALUE)
-                .addComponent(AddWaypointButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(WaypointTextInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(SearchByRatingButton)
-                .addGap(9, 9, 9)
-                .addComponent(RatingTextInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        Title.setBackground(new java.awt.Color(0, 102, 255));
-
-        TitleText.setBackground(new java.awt.Color(255, 255, 255));
-        TitleText.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 24)); // NOI18N
-        TitleText.setForeground(new java.awt.Color(239, 77, 55));
-        TitleText.setText("                                 MapBrothers Colorado Navigation");
-        TitleText.setToolTipText("");
-
-        javax.swing.GroupLayout TitleLayout = new javax.swing.GroupLayout(Title);
-        Title.setLayout(TitleLayout);
-        TitleLayout.setHorizontalGroup(
-            TitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(TitleLayout.createSequentialGroup()
-                .addGap(85, 85, 85)
-                .addComponent(TitleText, javax.swing.GroupLayout.PREFERRED_SIZE, 669, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(125, Short.MAX_VALUE))
-        );
-        TitleLayout.setVerticalGroup(
-            TitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(TitleLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(TitleText)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jSplitPane3.setRightComponent(Navigation);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Map, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(Title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(Navigation, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jSplitPane3)
+                    .addComponent(Title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(1, 1, 1))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(Title, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Map, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Navigation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jSplitPane3))
         );
 
         pack();
@@ -231,6 +242,10 @@ public class GUITrial extends javax.swing.JFrame {
         // TODO add your handling code here:
     }                                               
 
+    private void WaypointTextInputActionPerformed(java.awt.event.ActionEvent evt) {                                                  
+        // TODO add your handling code here:
+    }                                                 
+
     private void AddWaypointButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                  
         // TODO add your handling code here:
     }                                                 
@@ -239,14 +254,8 @@ public class GUITrial extends javax.swing.JFrame {
         // TODO add your handling code here:
     }                                                    
 
-    private void WaypointTextInputActionPerformed(java.awt.event.ActionEvent evt) {                                                  
-        // TODO add your handling code here:
-    }                                                 
-
     /**
-     * 
-     * TODO Put here a description of what this method does.
-     *
+     * @param args the command line arguments
      */
     public static void draw() {
         /* Set the Nimbus look and feel */
@@ -295,5 +304,6 @@ public class GUITrial extends javax.swing.JFrame {
     private javax.swing.JPanel Title;
     private javax.swing.JLabel TitleText;
     private javax.swing.JTextField WaypointTextInput;
+    private javax.swing.JSplitPane jSplitPane3;
     // End of variables declaration                   
 }
