@@ -15,7 +15,7 @@ import javax.swing.JTextField;
 
 
 public class GUI extends JFrame {
-	private Map mapFile;
+	public Map mapFile;
 	private JPanel graph;
 	
 	public GUI(Map mapFile) {
@@ -77,7 +77,26 @@ public class GUI extends JFrame {
 		ActionListener routeButton = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("Route");	
+				System.out.println("Route: " + toTxt.getText());
+				if(!toTxt.getText().equals("") && !fromTxt.getText().equals("") && !toTxt.getText().equals("choose a place") && !fromTxt.getText().equals("choose a place")){
+					String to = toTxt.getText();
+					String from = fromTxt.getText();
+					for(String n: GUI.this.mapFile.getTablePOIs().keySet()){
+						GUI.this.mapFile.getTablePOIs().get(n).straightLineDist =
+						GUI.this.mapFile.getTablePOIs().get(n).DistToNeighbor(GUI.this.mapFile.getTablePOIs().get(to));
+					}
+					GUI.this.mapFile.navigate(to, from);
+				}
+				else if(toTxt.getText().equals("") && !fromTxt.getText().equals("")){
+					toTxt.setText("choose a place");
+				}
+				else if(!toTxt.getText().equals("") && fromTxt.getText().equals("")){
+					fromTxt.setText("choose a place");
+				}
+				else{
+					toTxt.setText("choose a place");
+					fromTxt.setText("choose a place");
+				}
 			}	
 		};
 		route.addActionListener(routeButton);

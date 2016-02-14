@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.PriorityQueue;
 import java.util.Scanner;
 import java.util.TreeSet;
 
@@ -134,6 +136,34 @@ public class Map {
 //		return val;
 //		
 //	}
+	public void navigate(String to, String from){
+		LinkedList path = new LinkedList();
+		PriorityQueue<PointofInterest> shortestDist = new PriorityQueue<PointofInterest>(new Comparator<PointofInterest>() {
+			
+			public int compare(PointofInterest pointOne, PointofInterest pointTwo) {
+				if(pointOne.distToTravel > pointTwo.distToTravel) return 1;
+				if(pointOne.distToTravel < pointTwo.distToTravel) return -1;
+				return 0;
+			}	
+		});
+		shortestDist.add(this.tableOfPOIs.get(from));
+		boolean reached = false;
+		while(true){
+			PointofInterest location = shortestDist.poll();
+			if(location.toString().equals(to)){
+				path.add(location);
+				break;
+			}
+			for(int i = 0; i < location.neighbors.size(); i++){
+				location.neighbors.get(i).getOtherPoint().distToTravel = location.neighbors.get(i).distance + location.neighbors.get(i).getOtherPoint().straightLineDist; 
+				shortestDist.add(location.neighbors.get(i).getOtherPoint());
+			}
+			//figure out a check on the addition to the linked list.
+			path.add(location);
+		}
+		//call a function that will illustrate the shortest path by drawing it on the map.
+		
+	}
 	
 	private String getPath(Map.PointofInterest start, Map.PointofInterest end) {
 		
@@ -154,7 +184,8 @@ public class Map {
 	public class PointofInterest implements TreeNode {
 		private String name;
 		private String type;
-		private double straightLineDist;
+		public double straightLineDist;
+		private double distToTravel;
 		private double rating;
 		public double lat;
 		public double longit;
