@@ -65,7 +65,7 @@ public class MapDrawer extends JPanel implements MouseListener {
 		Rectangle2D.Double outline = new Rectangle2D.Double(0, 0, FRAME_WIDTH, FRAME_HEIGHT);
 		g.draw(outline);
 		g.translate(FRAME_WIDTH/2.0, FRAME_HEIGHT/2.0);
-		for (Object s : this.map.keySet()) {
+		for (String s : this.map.keySet()) {
 			String type = this.map.get(s).getType();
 			double lat = this.map.get(s).getLatitude();
 			double longit = this.map.get(s).getLongitude();

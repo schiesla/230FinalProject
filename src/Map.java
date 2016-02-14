@@ -88,7 +88,7 @@ public class Map {
 	 *
 	 */
 	@SuppressWarnings("resource")
-	public void populateNeighbors() {
+	private void populateNeighbors() {
 
 		for (String key : this.tableOfPOIs.keySet()) {
 
@@ -112,7 +112,7 @@ public class Map {
 		}
 	}
 	
-	public boolean addConnection(String name1, String name2, double distance) {
+	private boolean addConnection(String name1, String name2, double distance) {
 		
 		if(!this.tableOfPOIs.containsKey(name1) && !this.tableOfPOIs.containsKey(name2)) return false;
 		
@@ -134,6 +134,18 @@ public class Map {
 //		return val;
 //		
 //	}
+	
+	private String getPath(Map.PointofInterest start, Map.PointofInterest end) {
+		
+		//implmement A* search algorithm
+		return "";
+	}
+	
+	private String getDistanceTime() {
+		
+		//implement dist/time on top of A*
+		return "";
+	}
 	
 	public HashMap<String, Map.PointofInterest> getTablePOIs(){
 		return this.tableOfPOIs;
@@ -212,6 +224,7 @@ public class Map {
 		public double getLongitude(){
 			return this.longit;
 		}
+		
 		public ArrayList<Connection> getNeighbors(){
 			return this.neighbors;
 		}
