@@ -38,7 +38,7 @@ public class MapDrawer extends JPanel implements MouseListener {
 	private static final double HEIGHT = TOP_LEFT_CORNER.y - BOTTOM_LEFT_CORNER.y;
 	private static final Dimension d = new Dimension();
 	
-	private static final double FRAME_MULTIPLIER = 100;
+	private static final double FRAME_MULTIPLIER = 110;
 	private static final double MAP_RADIUS = FRAME_MULTIPLIER / 10;
 	
 	private static final double FRAME_WIDTH = WIDTH * FRAME_MULTIPLIER;

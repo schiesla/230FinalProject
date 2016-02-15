@@ -6,7 +6,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JSplitPane;
 import javax.swing.JTextField;
 
-public class GUITrial extends javax.swing.JFrame {
+public class MapGUI extends javax.swing.JFrame {
 	
     private JButton AddWaypointButton;
     private JLabel DestinationLabel;
@@ -27,7 +27,7 @@ public class GUITrial extends javax.swing.JFrame {
     
     public Map guiMap;
 
-    public GUITrial(Map map) {
+    public MapGUI(Map map) {
         this.guiMap = map;
     	initComponents();
     }
@@ -39,7 +39,7 @@ public class GUITrial extends javax.swing.JFrame {
         Title = new javax.swing.JPanel();
         TitleText = new javax.swing.JLabel();
         jSplitPane3 = new javax.swing.JSplitPane();
-        Map = new javax.swing.JPanel();
+        Map = new MapDrawer(this.guiMap.getTablePOIs());
         SearchByRatingButton = new javax.swing.JButton();
         AddWaypointButton = new javax.swing.JButton();
         WaypointTextInput = new javax.swing.JTextField();

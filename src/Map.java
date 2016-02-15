@@ -165,12 +165,6 @@ public class Map {
 		
 	}
 	
-	private String getPath(Map.PointofInterest start, Map.PointofInterest end) {
-		
-		//implmement A* search algorithm
-		return "";
-	}
-	
 	private String getDistanceTime() {
 		
 		//implement dist/time on top of A*
