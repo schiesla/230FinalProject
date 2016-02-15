@@ -39,8 +39,8 @@ public class MapDrawer extends JPanel implements MouseListener {
 	private static final double HEIGHT = TOP_LEFT_CORNER.y - BOTTOM_LEFT_CORNER.y;
 	private static final Dimension d = new Dimension();
 	
-	private static final double FRAME_MULTIPLIER = 110;
-	private static final double MAP_RADIUS = FRAME_MULTIPLIER / 10;
+	private static final double FRAME_MULTIPLIER = 100;
+	private static final double MAP_RADIUS = FRAME_MULTIPLIER / 15;
 	
 	private static final double FRAME_WIDTH = WIDTH * FRAME_MULTIPLIER;
 	private static final double FRAME_HEIGHT = HEIGHT * FRAME_MULTIPLIER;
@@ -53,8 +53,8 @@ public class MapDrawer extends JPanel implements MouseListener {
 	public MapDrawer(HashMap<String, Map.PointofInterest> map, JTextField to, JTextField from) {
 
 		this.map = map;
-		this.d.setSize(FRAME_WIDTH, FRAME_HEIGHT);
-		setPreferredSize(this.d);
+//		this.d.setSize(FRAME_WIDTH, FRAME_HEIGHT);
+//		setPreferredSize(this.d);
 		this.to = to;
 		this.from = from;
 		
@@ -69,8 +69,8 @@ public class MapDrawer extends JPanel implements MouseListener {
 	}
 	
 	public void drawMap(Graphics2D g) {
-		Rectangle2D.Double outline = new Rectangle2D.Double(0, 0, FRAME_WIDTH, FRAME_HEIGHT);
-		g.draw(outline);
+//		Rectangle2D.Double outline = new Rectangle2D.Double(0, 0, FRAME_WIDTH, FRAME_HEIGHT);
+//		g.draw(outline);
 		g.translate(FRAME_WIDTH/2.0, FRAME_HEIGHT/2.0);
 		for (String s : this.map.keySet()) {
 			String type = this.map.get(s).getType();
