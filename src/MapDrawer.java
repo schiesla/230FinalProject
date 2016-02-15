@@ -10,6 +10,7 @@ import java.awt.geom.Rectangle2D;
 import java.util.HashMap;
 
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class MapDrawer extends JPanel implements MouseListener {
 	
@@ -44,13 +45,19 @@ public class MapDrawer extends JPanel implements MouseListener {
 	private static final double FRAME_WIDTH = WIDTH * FRAME_MULTIPLIER;
 	private static final double FRAME_HEIGHT = HEIGHT * FRAME_MULTIPLIER;
 	
+	private JTextField to;
+	private JTextField from;
+	
 	private HashMap<Shape, Map.PointofInterest> shapes = new HashMap<Shape, Map.PointofInterest>();
 		
-	public MapDrawer(HashMap<String, Map.PointofInterest> map) {
+	public MapDrawer(HashMap<String, Map.PointofInterest> map, JTextField to, JTextField from) {
 
 		this.map = map;
 		this.d.setSize(FRAME_WIDTH, FRAME_HEIGHT);
 		setPreferredSize(this.d);
+		this.to = to;
+		this.from = from;
+		
 		this.addMouseListener(this);
 	}
 	
@@ -105,6 +112,12 @@ public class MapDrawer extends JPanel implements MouseListener {
 			double distForm = Math.sqrt(exs + whys);
 			if (distForm < MAP_RADIUS/2.0) {
 				System.out.println(this.shapes.get(s).getName());
+				if (this.to.hasFocus()) {
+					this.to.setText(this.shapes.get(s).getName());
+					this.from.requestFocus();
+				}
+				if (this.from.hasFocus())
+					this.from.setText(this.shapes.get(s).getName());
 			}
 		}
 	}

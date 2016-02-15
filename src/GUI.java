@@ -20,7 +20,7 @@ public class GUI extends JFrame {
 	
 	public GUI(Map mapFile) {
 		this.mapFile = mapFile;
-		this.graph = new MapDrawer(this.mapFile.getTablePOIs());
+//		this.graph = new MapDrawer(this.mapFile.getTablePOIs());
 		this.setUpPanels();
 		
 	}

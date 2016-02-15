@@ -30,6 +30,7 @@ public class MapGUI extends javax.swing.JFrame {
     public MapGUI(Map map) {
         this.guiMap = map;
     	initComponents();
+    	this.LocationTextInput.requestFocus();
     }
 
     @SuppressWarnings("unchecked")                          
@@ -39,7 +40,6 @@ public class MapGUI extends javax.swing.JFrame {
         Title = new javax.swing.JPanel();
         TitleText = new javax.swing.JLabel();
         jSplitPane3 = new javax.swing.JSplitPane();
-        Map = new MapDrawer(this.guiMap.getTablePOIs());
         SearchByRatingButton = new javax.swing.JButton();
         AddWaypointButton = new javax.swing.JButton();
         WaypointTextInput = new javax.swing.JTextField();
@@ -51,6 +51,7 @@ public class MapGUI extends javax.swing.JFrame {
         FindRouteButton = new javax.swing.JButton();
         LocationTextInput = new javax.swing.JTextField();
         DestinationTextInput = new javax.swing.JTextField();
+        Map = new MapDrawer(this.guiMap.getTablePOIs(), LocationTextInput, DestinationTextInput);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Map");
@@ -242,7 +243,6 @@ public class MapGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSplitPane3))
         );
-        
         pack();
     }                       
 
