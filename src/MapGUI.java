@@ -254,9 +254,12 @@ public class MapGUI extends javax.swing.JFrame {
     	if(!DestinationTextInput.getText().equals("") && !LocationTextInput.getText().equals("") && !DestinationTextInput.getText().equals("choose a place") && !LocationTextInput.getText().equals("choose a place")){
 			String to = DestinationTextInput.getText();
 			String from = LocationTextInput.getText();
-			for(String n: MapGUI.this.guiMap.getTablePOIs().keySet()){
-				MapGUI.this.guiMap.getTablePOIs().get(n).straightLineDist =
-				MapGUI.this.guiMap.getTablePOIs().get(n).DistToNeighbor(MapGUI.this.guiMap.getTablePOIs().get(to));
+			if(MapGUI.this.guiMap.getTablePOIs().get(to) != null && MapGUI.this.guiMap.getTablePOIs().get(from) != null){
+				for(String n: MapGUI.this.guiMap.getTablePOIs().keySet()){
+					MapGUI.this.guiMap.getTablePOIs().get(n).straightLineDist =
+					MapGUI.this.guiMap.getTablePOIs().get(n).DistToNeighbor(MapGUI.this.guiMap.getTablePOIs().get(to));
+				}
+				
 			}
 			MapGUI.this.guiMap.navigate(to, from);
 		}
