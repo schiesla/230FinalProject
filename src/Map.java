@@ -16,6 +16,7 @@ public class Map {
 	
 	private HashMap<String, Map.PointofInterest> tableOfPOIs;
 	private TreeSet<Map.PointofInterest> ratings;
+	public double navigationDist = 0;
 //	private HashMap<Integer, Connection> connections;
 
 	public Map() {
@@ -175,6 +176,11 @@ public class Map {
 				
 				path.remove(i - 1);
 			}
+		}
+		
+		for(int i = path.size() - 1; i > 1; i--) {
+			
+			this.navigationDist += path.get(i - 1).DistToNeighbor(path.get(i));
 		}
 		
 		System.out.println(path.toString());

@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.util.HashMap;
@@ -49,6 +50,7 @@ public class MapDrawer extends JPanel implements MouseListener {
 	private JTextField from;
 	
 	private HashMap<Shape, Map.PointofInterest> shapes = new HashMap<Shape, Map.PointofInterest>();
+	private HashMap<Color, Map.Connection> connections = new HashMap<>();
 		
 	public MapDrawer(HashMap<String, Map.PointofInterest> map, JTextField to, JTextField from) {
 
@@ -91,7 +93,17 @@ public class MapDrawer extends JPanel implements MouseListener {
 			float labelY = (float)(point.y * -FRAME_MULTIPLIER + MAP_RADIUS);
 			g.setColor(Color.BLACK);
 			g.drawString(this.map.get(s).getName(), labelX, labelY);
+			
+			for(Map.Connection conn : this.map.get(s).neighbors) {
+				
+				double latLine = conn.getOtherPoint().getLatitude();
+				double longitLine = conn.getOtherPoint().getLongitude();
+				Point2D.Double pointLine = new Point2D.Double(longitLine - CENTER_LONG, latLine - CENTER_LAT);
+				Line2D.Double path = new Line2D.Double(point.getX() * -FRAME_MULTIPLIER, point.getY() * -FRAME_MULTIPLIER, pointLine.getX() * -FRAME_MULTIPLIER, pointLine.getY() * -FRAME_MULTIPLIER);
+				g.draw(path);
+			}
 		}
+		
 		g.translate(-FRAME_WIDTH/2.0, -FRAME_HEIGHT/2.0);
 	}
 	
