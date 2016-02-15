@@ -136,8 +136,8 @@ public class Map {
 //		return val;
 //		
 //	}
-	public void navigate(String to, String from){
-		LinkedList path = new LinkedList();
+	public LinkedList<PointofInterest> navigate(String to, String from){
+		LinkedList<PointofInterest> path = new LinkedList<PointofInterest>();
 		PriorityQueue<PointofInterest> shortestDist = new PriorityQueue<PointofInterest>(new Comparator<PointofInterest>() {
 			
 			public int compare(PointofInterest pointOne, PointofInterest pointTwo) {
@@ -147,7 +147,6 @@ public class Map {
 			}	
 		});
 		shortestDist.add(this.tableOfPOIs.get(from));
-		boolean reached = false;
 		while(true){
 			PointofInterest location = shortestDist.poll();
 			if(location.toString().equals(to)){
@@ -163,7 +162,37 @@ public class Map {
 		}
 		//call a function that will illustrate the shortest path by drawing it on the map.
 		
+		return path;
 	}
+	
+//	public static void main(String[] args) {
+//		
+//		Map m = new Map();
+//		PointofInterest valiSki = m.tableOfPOIs.get("Vali Ski Resort");
+//		PointofInterest aspen = m.tableOfPOIs.get("Aspen");
+//		PointofInterest boulder = m.tableOfPOIs.get("Boulder");
+//		PointofInterest coloradoSprings = m.tableOfPOIs.get("Colorado Springs");
+//		PointofInterest pikesPeak = m.tableOfPOIs.get("Pikes Peak");
+//		PointofInterest cheyenneMountain = m.tableOfPOIs.get("Cheyenne Mountain Resort");
+//		
+//		valiSki.addConnection(aspen, valiSki.DistToNeighbor(aspen));
+//		valiSki.addConnection(boulder, valiSki.DistToNeighbor(boulder)); // Vali Ski Resort has two neighbors, Aspen and Boulder
+//		aspen.addConnection(valiSki, aspen.DistToNeighbor(valiSki));
+//		boulder.addConnection(valiSki, boulder.DistToNeighbor(valiSki));
+//		
+//		cheyenneMountain.addConnection(aspen, cheyenneMountain.DistToNeighbor(aspen));
+//		cheyenneMountain.addConnection(pikesPeak, cheyenneMountain.DistToNeighbor(pikesPeak));
+//		cheyenneMountain.addConnection(coloradoSprings, cheyenneMountain.DistToNeighbor(coloradoSprings)); // Chey Montains has three neighbors, Aspen, PP, and CS
+//		aspen.addConnection(cheyenneMountain, aspen.DistToNeighbor(cheyenneMountain));
+//		pikesPeak.addConnection(cheyenneMountain, pikesPeak.DistToNeighbor(cheyenneMountain));
+//		coloradoSprings.addConnection(cheyenneMountain, coloradoSprings.DistToNeighbor(cheyenneMountain));
+//
+//		boulder.addConnection(coloradoSprings, boulder.DistToNeighbor(coloradoSprings)); // Boulder and CS are neighbors
+//		coloradoSprings.addConnection(boulder, coloradoSprings.DistToNeighbor(boulder));
+//
+//		LinkedList<PointofInterest> path = m.navigate("Boulder", "Vali Ski Resort");
+//		System.out.println(path.toString());
+//	}
 	
 	private String getDistanceTime() {
 		
