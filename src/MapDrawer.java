@@ -72,7 +72,7 @@ public class MapDrawer extends JPanel implements MouseListener {
 			Point2D.Double point = new Point2D.Double(longit - CENTER_LONG, lat - CENTER_LAT);
 			Rectangle2D.Double rect = new Rectangle2D.Double(point.x * -FRAME_MULTIPLIER - MAP_RADIUS/2.0, point.y * -FRAME_MULTIPLIER - MAP_RADIUS/2.0, MAP_RADIUS, MAP_RADIUS);
 			this.shapes.put(rect, this.map.get(s));
-			System.out.println(this.map.get(s).getName() + ": " + rect.x + " " + rect.y);
+//			System.out.println(this.map.get(s).getName() + ": " + rect.x + " " + rect.y);
 			if (type.equals("City"))
 				g.setColor(Color.BLACK);
 			if (type.equals("Resort"))

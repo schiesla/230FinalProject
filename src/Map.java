@@ -106,7 +106,6 @@ public class Map {
 			while (input.hasNextLine()) {
 
 				String name = input.nextLine();
-				
 				this.addConnection(temp.getName(), name, temp.DistToNeighbor(this.tableOfPOIs.get(name)));
 			}
 
@@ -146,22 +145,39 @@ public class Map {
 				return 0;
 			}	
 		});
+		
 		shortestDist.add(this.tableOfPOIs.get(from));
-		while(true){
+		int count = 1;
+		while(count < 10){
 			PointofInterest location = shortestDist.poll();
-			if(location.toString().equals(to)){
+			if(location.getName().equals(to)){
 				path.add(location);
 				break;
 			}
 			for(int i = 0; i < location.neighbors.size(); i++){
 				location.neighbors.get(i).getOtherPoint().distToTravel = location.neighbors.get(i).distance + location.neighbors.get(i).getOtherPoint().straightLineDist; 
-				shortestDist.add(location.neighbors.get(i).getOtherPoint());
+				
+				if(!shortestDist.contains(location) || !path.contains(location)) {
+					
+					shortestDist.add(location.neighbors.get(i).getOtherPoint());
+				}
 			}
+			
 			//figure out a check on the addition to the linked list.
 			path.add(location);
+			count++;
 		}
 		//call a function that will illustrate the shortest path by drawing it on the map.
 		
+		for(int i = path.size() - 1; i > 1; i--) {
+			
+			if(!(path.get(i - 1).isNeighbor(path.get(i)))) {
+				
+				path.remove(i - 1);
+			}
+		}
+		
+		System.out.println(path.toString());
 		return path;
 	}
 	
@@ -269,6 +285,19 @@ public class Map {
 		public void addConnection(PointofInterest point, double distance) {
 			
 			this.neighbors.add(new Connection(point, distance));
+		}
+		
+		public boolean isNeighbor(PointofInterest point) {
+			
+			for(Connection con : this.neighbors) {
+				
+				if(con.otherPoint.name.equals(point.name)) {
+					
+					return true;
+				}
+			}
+			
+			return false;
 		}
 		
 		public double getLatitude(){
