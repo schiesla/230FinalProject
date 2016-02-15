@@ -80,6 +80,10 @@ public class MapDrawer extends JPanel implements MouseListener {
 			if (type.equals("Park"))
 				g.setColor(Color.GREEN);
 			g.fill(rect);
+			float labelX = (float)(point.x * -FRAME_MULTIPLIER + MAP_RADIUS/2.0);
+			float labelY = (float)(point.y * -FRAME_MULTIPLIER + MAP_RADIUS);
+			g.setColor(Color.BLACK);
+			g.drawString(this.map.get(s).getName(), labelX, labelY);
 		}
 		g.translate(-FRAME_WIDTH/2.0, -FRAME_HEIGHT/2.0);
 	}
