@@ -8,8 +8,12 @@ import java.awt.event.MouseListener;
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -41,7 +45,7 @@ public class MapDrawer extends JPanel implements MouseListener {
 	private static final Dimension d = new Dimension();
 	
 	private static final double FRAME_MULTIPLIER = 100;
-	private static final double MAP_RADIUS = FRAME_MULTIPLIER / 15;
+	private static final double MAP_RADIUS = FRAME_MULTIPLIER / 6;
 	
 	private static final double FRAME_WIDTH = WIDTH * FRAME_MULTIPLIER;
 	private static final double FRAME_HEIGHT = HEIGHT * FRAME_MULTIPLIER;
@@ -67,10 +71,15 @@ public class MapDrawer extends JPanel implements MouseListener {
 		System.out.println("its drawing");
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
-		this.drawMap(g2);
+		try {
+			this.drawMap(g2);
+		} catch (IOException exception) {
+			// TODO Auto-generated catch-block stub.
+			exception.printStackTrace();
+		}
 	}
 	
-	public void drawMap(Graphics2D g) {
+	public void drawMap(Graphics2D g) throws IOException {
 //		Rectangle2D.Double outline = new Rectangle2D.Double(0, 0, FRAME_WIDTH, FRAME_HEIGHT);
 //		g.draw(outline);
 		g.translate(FRAME_WIDTH/2.0, FRAME_HEIGHT/2.0);
@@ -81,14 +90,29 @@ public class MapDrawer extends JPanel implements MouseListener {
 			Point2D.Double point = new Point2D.Double(longit - CENTER_LONG, lat - CENTER_LAT);
 			Rectangle2D.Double rect = new Rectangle2D.Double(point.x * -FRAME_MULTIPLIER - MAP_RADIUS/2.0, point.y * -FRAME_MULTIPLIER - MAP_RADIUS/2.0, MAP_RADIUS, MAP_RADIUS);
 			this.shapes.put(rect, this.map.get(s));
+			
+			BufferedImage image = null;
+			
 //			System.out.println(this.map.get(s).getName() + ": " + rect.x + " " + rect.y);
-			if (type.equals("City"))
-				g.setColor(Color.BLACK);
-			if (type.equals("Resort"))
-				g.setColor(Color.CYAN);
-			if (type.equals("Park"))
-				g.setColor(Color.GREEN);
-			g.fill(rect);
+			if (type.equals("City")) {
+				image = ImageIO.read(new File(
+						"CitySymbol.png"));
+			}
+				
+			if (type.equals("Resort")) {
+				image = ImageIO.read(new File(
+						"ResortSymbol.png"));
+			}
+				
+			if (type.equals("Park")){
+				image = ImageIO.read(new File(
+						"ParkSymbol.png"));
+			}
+			
+			g.drawImage(image, (int) rect.getX(), (int) rect.getY(), (int) rect.getWidth(), (int) rect.getHeight(),
+					Color.BLACK, this);
+			
+//			g.fill(rect);
 			float labelX = (float)(point.x * -FRAME_MULTIPLIER + MAP_RADIUS/2.0);
 			float labelY = (float)(point.y * -FRAME_MULTIPLIER + MAP_RADIUS);
 			g.setColor(Color.BLACK);
