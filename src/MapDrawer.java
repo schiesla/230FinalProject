@@ -61,6 +61,7 @@ public class MapDrawer extends JPanel implements MouseListener {
 		this.map = map;
 //		this.d.setSize(FRAME_WIDTH, FRAME_HEIGHT);
 //		setPreferredSize(this.d);
+		this.setBackground(new java.awt.Color(255, 255, 255));
 		this.to = to;
 		this.from = from;
 		
@@ -74,7 +75,6 @@ public class MapDrawer extends JPanel implements MouseListener {
 		try {
 			this.drawMap(g2);
 		} catch (IOException exception) {
-			// TODO Auto-generated catch-block stub.
 			exception.printStackTrace();
 		}
 	}

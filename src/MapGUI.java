@@ -267,7 +267,8 @@ public class MapGUI extends javax.swing.JFrame {
 
 			} else {
 
-				TravelDistTime.setText("Travel Time: " + this.guiMap.navigationDist / 50 + " h");
+				String time = String.format("%.2f", (this.guiMap.navigationDist / 50));
+				TravelDistTime.setText("Travel Time: " + time + " h");
 			}
 
 			this.guiMap.navigationDist = 0;
