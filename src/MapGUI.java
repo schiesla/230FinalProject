@@ -251,7 +251,25 @@ public class MapGUI extends javax.swing.JFrame {
     }                                                 
 
     private void FindRouteButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                
-        // TODO add your handling code here:
+    	if(!DestinationTextInput.getText().equals("") && !LocationTextInput.getText().equals("") && !DestinationTextInput.getText().equals("choose a place") && !LocationTextInput.getText().equals("choose a place")){
+			String to = DestinationTextInput.getText();
+			String from = LocationTextInput.getText();
+			for(String n: MapGUI.this.guiMap.getTablePOIs().keySet()){
+				MapGUI.this.guiMap.getTablePOIs().get(n).straightLineDist =
+				MapGUI.this.guiMap.getTablePOIs().get(n).DistToNeighbor(MapGUI.this.guiMap.getTablePOIs().get(to));
+			}
+			MapGUI.this.guiMap.navigate(to, from);
+		}
+		else if(DestinationTextInput.getText().equals("") && !LocationTextInput.getText().equals("")){
+			DestinationTextInput.setText("choose a place");
+		}
+		else if(!DestinationTextInput.getText().equals("") && LocationTextInput.getText().equals("")){
+			LocationTextInput.setText("choose a place");
+		}
+		else{
+			DestinationTextInput.setText("choose a place");
+			LocationTextInput.setText("choose a place");
+		}
     }                                               
 
     private void GetResultByTimeActionPerformed(java.awt.event.ActionEvent evt) {                                                
