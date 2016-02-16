@@ -72,6 +72,16 @@ public class MapDrawer extends JPanel implements MouseListener {
 		System.out.println("its drawing");
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
+		
+		BufferedImage image = null;
+		try {
+			image = ImageIO.read(new File(
+					"MapBackground.png"));
+		} catch (IOException exception1) {
+			exception1.printStackTrace();
+		}
+		g2.drawImage(image, 0, 0, 700, 400, this);
+		
 		try {
 			this.drawMap(g2);
 		} catch (IOException exception) {
