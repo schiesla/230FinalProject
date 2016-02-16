@@ -18,145 +18,152 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class MapDrawer extends JPanel implements MouseListener {
-	
+
 	private HashMap<String, Map.PointofInterest> map;
-	
+
 	private static final double TOP_LEFT_CORNER_LAT = 41.0007;
 	private static final double TOP_LEFT_CORNER_LONG = 109.0501;
 	private static final Point2D.Double TOP_LEFT_CORNER = new Point2D.Double(TOP_LEFT_CORNER_LONG, TOP_LEFT_CORNER_LAT);
-	
+
 	private static final double TOP_RIGHT_CORNER_LAT = 41.0024;
 	private static final double TOP_RIGHT_CORNER_LONG = 102.0517;
-	private static final Point2D.Double TOP_RIGHT_CORNER = new Point2D.Double(TOP_RIGHT_CORNER_LONG, TOP_RIGHT_CORNER_LAT);
-	
+	private static final Point2D.Double TOP_RIGHT_CORNER = new Point2D.Double(TOP_RIGHT_CORNER_LONG,
+			TOP_RIGHT_CORNER_LAT);
+
 	private static final double BOTTOM_LEFT_CORNER_LAT = 36.9991;
 	private static final double BOTTOM_LEFT_CORNER_LONG = 109.0452;
-	private static final Point2D.Double BOTTOM_LEFT_CORNER = new Point2D.Double(BOTTOM_LEFT_CORNER_LONG, BOTTOM_LEFT_CORNER_LAT);
-	
+	private static final Point2D.Double BOTTOM_LEFT_CORNER = new Point2D.Double(BOTTOM_LEFT_CORNER_LONG,
+			BOTTOM_LEFT_CORNER_LAT);
+
 	private static final double BOTTOM_RIGHT_CORNER_LAT = 36.9930;
 	private static final double BOTTOM_RIGHT_CORNER_LONG = 102.0421;
-	private static final Point2D.Double BOTTOM_RIGHT_CORNER = new Point2D.Double(BOTTOM_RIGHT_CORNER_LONG, BOTTOM_RIGHT_CORNER_LAT);
-	
-	private static final double CENTER_LAT = (TOP_LEFT_CORNER_LAT + BOTTOM_RIGHT_CORNER_LAT)/2.0;
-	private static final double CENTER_LONG = (TOP_LEFT_CORNER_LONG + BOTTOM_RIGHT_CORNER_LONG)/2.0;
-	
+	private static final Point2D.Double BOTTOM_RIGHT_CORNER = new Point2D.Double(BOTTOM_RIGHT_CORNER_LONG,
+			BOTTOM_RIGHT_CORNER_LAT);
+
+	private static final double CENTER_LAT = (TOP_LEFT_CORNER_LAT + BOTTOM_RIGHT_CORNER_LAT) / 2.0;
+	private static final double CENTER_LONG = (TOP_LEFT_CORNER_LONG + BOTTOM_RIGHT_CORNER_LONG) / 2.0;
+
 	private static final double WIDTH = TOP_LEFT_CORNER.x - TOP_RIGHT_CORNER.x;
 	private static final double HEIGHT = TOP_LEFT_CORNER.y - BOTTOM_LEFT_CORNER.y;
 	private static final Dimension d = new Dimension();
-	
+
 	private static final double FRAME_MULTIPLIER = 100;
-	private static final double MAP_RADIUS = FRAME_MULTIPLIER / 6;
-	
+	private static final double MAP_RADIUS = FRAME_MULTIPLIER / 4.5;
+
 	private static final double FRAME_WIDTH = WIDTH * FRAME_MULTIPLIER;
 	private static final double FRAME_HEIGHT = HEIGHT * FRAME_MULTIPLIER;
-	
+
 	private JTextField to;
 	private JTextField from;
-	
+
 	private HashMap<Shape, Map.PointofInterest> shapes = new HashMap<Shape, Map.PointofInterest>();
 	private HashMap<Color, Map.Connection> connections = new HashMap<>();
-		
+
 	public MapDrawer(HashMap<String, Map.PointofInterest> map, JTextField to, JTextField from) {
 
 		this.map = map;
-//		this.d.setSize(FRAME_WIDTH, FRAME_HEIGHT);
-//		setPreferredSize(this.d);
+		// this.d.setSize(FRAME_WIDTH, FRAME_HEIGHT);
+		// setPreferredSize(this.d);
 		this.setBackground(new java.awt.Color(255, 255, 255));
 		this.to = to;
 		this.from = from;
-		
+
 		this.addMouseListener(this);
 	}
-	
+
 	public void paintComponent(Graphics g) {
 		System.out.println("its drawing");
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
-		
+
 		BufferedImage image = null;
 		try {
-			image = ImageIO.read(new File(
-					"MapBackground.png"));
+			image = ImageIO.read(new File("MapBackground.png"));
 		} catch (IOException exception1) {
 			exception1.printStackTrace();
 		}
 		g2.drawImage(image, 0, 0, 700, 400, this);
-		
+
 		try {
 			this.drawMap(g2);
 		} catch (IOException exception) {
 			exception.printStackTrace();
 		}
 	}
-	
+
 	public void drawMap(Graphics2D g) throws IOException {
-//		Rectangle2D.Double outline = new Rectangle2D.Double(0, 0, FRAME_WIDTH, FRAME_HEIGHT);
-//		g.draw(outline);
-		g.translate(FRAME_WIDTH/2.0, FRAME_HEIGHT/2.0);
+		// Rectangle2D.Double outline = new Rectangle2D.Double(0, 0,
+		// FRAME_WIDTH, FRAME_HEIGHT);
+		// g.draw(outline);
+		g.translate(FRAME_WIDTH / 2.0, FRAME_HEIGHT / 2.0);
+		
 		for (String s : this.map.keySet()) {
+
 			String type = this.map.get(s).getType();
 			double lat = this.map.get(s).getLatitude();
 			double longit = this.map.get(s).getLongitude();
 			Point2D.Double point = new Point2D.Double(longit - CENTER_LONG, lat - CENTER_LAT);
-			Rectangle2D.Double rect = new Rectangle2D.Double(point.x * -FRAME_MULTIPLIER - MAP_RADIUS/2.0, point.y * -FRAME_MULTIPLIER - MAP_RADIUS/2.0, MAP_RADIUS, MAP_RADIUS);
-			this.shapes.put(rect, this.map.get(s));
 			
-			BufferedImage image = null;
-			
-//			System.out.println(this.map.get(s).getName() + ": " + rect.x + " " + rect.y);
-			if (type.equals("City")) {
-				image = ImageIO.read(new File(
-						"CitySymbol.png"));
-			}
-				
-			if (type.equals("Resort")) {
-				image = ImageIO.read(new File(
-						"ResortSymbol.png"));
-			}
-				
-			if (type.equals("Park")){
-				image = ImageIO.read(new File(
-						"ParkSymbol.png"));
-			}
-			
-			g.drawImage(image, (int) rect.getX(), (int) rect.getY(), (int) rect.getWidth(), (int) rect.getHeight(),
-					Color.BLACK, this);
-			
-//			g.fill(rect);
-			float labelX = (float)(point.x * -FRAME_MULTIPLIER + MAP_RADIUS/2.0);
-			float labelY = (float)(point.y * -FRAME_MULTIPLIER + MAP_RADIUS);
-			g.setColor(Color.BLACK);
-			g.drawString(this.map.get(s).getName(), labelX, labelY);
-			
-			for(Map.Connection conn : this.map.get(s).neighbors) {
-				
+			for (Map.Connection conn : this.map.get(s).neighbors) {
+
 				double latLine = conn.getOtherPoint().getLatitude();
 				double longitLine = conn.getOtherPoint().getLongitude();
 				Point2D.Double pointLine = new Point2D.Double(longitLine - CENTER_LONG, latLine - CENTER_LAT);
-				Line2D.Double path = new Line2D.Double(point.getX() * -FRAME_MULTIPLIER, point.getY() * -FRAME_MULTIPLIER, pointLine.getX() * -FRAME_MULTIPLIER, pointLine.getY() * -FRAME_MULTIPLIER);
+				Line2D.Double path = new Line2D.Double(point.getX() * -FRAME_MULTIPLIER,
+						point.getY() * -FRAME_MULTIPLIER, pointLine.getX() * -FRAME_MULTIPLIER,
+						pointLine.getY() * -FRAME_MULTIPLIER);
 				g.draw(path);
 			}
+
+			Rectangle2D.Double rect = new Rectangle2D.Double(point.x * -FRAME_MULTIPLIER - MAP_RADIUS / 2.0,
+					point.y * -FRAME_MULTIPLIER - MAP_RADIUS / 2.0, MAP_RADIUS, MAP_RADIUS);
+			this.shapes.put(rect, this.map.get(s));
+
+			BufferedImage image = null;
+
+			// System.out.println(this.map.get(s).getName() + ": " + rect.x + "
+			// " + rect.y);
+			if (type.equals("City")) {
+				image = ImageIO.read(new File("CitySymbol.png"));
+			}
+
+			if (type.equals("Resort")) {
+				image = ImageIO.read(new File("ResortSymbol.png"));
+			}
+
+			if (type.equals("Park")) {
+				image = ImageIO.read(new File("ParkSymbol.png"));
+			}
+
+			g.drawImage(image, (int) rect.getX(), (int) rect.getY(), (int) rect.getWidth(), (int) rect.getHeight(),
+					Color.BLACK, this);
+
+			// g.fill(rect);
+			float labelX = (float) (point.x * -FRAME_MULTIPLIER + MAP_RADIUS / 2.0);
+			float labelY = (float) (point.y * -FRAME_MULTIPLIER + MAP_RADIUS);
+			g.setColor(Color.BLACK);
+			g.drawString(this.map.get(s).getName(), labelX, labelY);
 		}
-		
-		g.translate(-FRAME_WIDTH/2.0, -FRAME_HEIGHT/2.0);
+
+		g.translate(-FRAME_WIDTH / 2.0, -FRAME_HEIGHT / 2.0);
 	}
-	
-//	private Shape nearestPOI(Point2D point) {
-//		for(Shape s : this.shapes.keySet()) {
-//			double distance = point.distance(s.)
-//		}
-//	}
+
+	// private Shape nearestPOI(Point2D point) {
+	// for(Shape s : this.shapes.keySet()) {
+	// double distance = point.distance(s.)
+	// }
+	// }
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-//		System.out.println("Should print");
-		double mouseX = e.getX() - FRAME_WIDTH/2.0 - MAP_RADIUS/2.0;
-		double mouseY = e.getY() - FRAME_HEIGHT/2.0 - MAP_RADIUS/2.0;
-		for(Shape s : this.shapes.keySet()) {
+		// System.out.println("Should print");
+		double mouseX = e.getX() - FRAME_WIDTH / 2.0 - MAP_RADIUS / 2.0;
+		double mouseY = e.getY() - FRAME_HEIGHT / 2.0 - MAP_RADIUS / 2.0;
+		for (Shape s : this.shapes.keySet()) {
 			double exs = Math.pow(mouseX - s.getBounds2D().getX(), 2);
 			double whys = Math.pow(mouseY - s.getBounds2D().getY(), 2);
 			double distForm = Math.sqrt(exs + whys);
-			if (distForm < MAP_RADIUS/2.0) {
+			if (distForm < MAP_RADIUS / 2.0) {
 				System.out.println(this.shapes.get(s).getName());
 				if (this.to.hasFocus()) {
 					this.to.setText(this.shapes.get(s).getName());
@@ -171,24 +178,24 @@ public class MapDrawer extends JPanel implements MouseListener {
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
 		// TODO Auto-generated method stub.
-		
+
 	}
 
 	@Override
 	public void mouseExited(MouseEvent arg0) {
 		// TODO Auto-generated method stub.
-		
+
 	}
 
 	@Override
 	public void mousePressed(MouseEvent arg0) {
 		// TODO Auto-generated method stub.
-		
+
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub.
-		
+
 	}
 }
