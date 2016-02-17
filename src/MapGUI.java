@@ -17,6 +17,8 @@ public class MapGUI extends javax.swing.JFrame {
 	private javax.swing.JLabel TravelDistTime;
 	private javax.swing.JComboBox<String> WaypointDropDown;
 	private javax.swing.JSplitPane jSplitPane3;
+	private javax.swing.JButton zoomIn;
+	private javax.swing.JButton zoomOut;
 	
 	private boolean displayDistance = true;
 	private Map guiMap;

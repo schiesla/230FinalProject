@@ -59,6 +59,14 @@ public class MapDrawer extends JPanel implements MouseListener {
 	private JTextField from;
 	private boolean routeButtonPressed;
 	private LinkedList path;
+	
+	private double lastMouseX;
+	private double lastMouseY;
+	
+	private double panelCenterX = FRAME_WIDTH/2.0;
+	private double panelCenterY = FRAME_HEIGHT/2.0;
+	
+	private boolean mousePressed = false;
 
 	private HashMap<Shape, Map.PointofInterest> shapes = new HashMap<Shape, Map.PointofInterest>();
 	private HashMap<Color, Map.Connection> connections = new HashMap<>();
@@ -66,8 +74,6 @@ public class MapDrawer extends JPanel implements MouseListener {
 	public MapDrawer(HashMap<String, Map.PointofInterest> map, JTextField to, JTextField from) {
 
 		this.map = map;
-		// this.d.setSize(FRAME_WIDTH, FRAME_HEIGHT);
-		// setPreferredSize(this.d);
 		this.setBackground(new java.awt.Color(255, 255, 255));
 		this.to = to;
 		this.from = from;
@@ -87,7 +93,7 @@ public class MapDrawer extends JPanel implements MouseListener {
 		} catch (IOException exception1) {
 			exception1.printStackTrace();
 		}
-		g2.drawImage(image, 0, 0, 700, 400, this);
+		g2.drawImage(image, 0, 0, (int) FRAME_WIDTH, (int) FRAME_HEIGHT, this);
 
 		try {
 			this.drawMap(g2);
@@ -102,10 +108,7 @@ public class MapDrawer extends JPanel implements MouseListener {
 	}
 
 	public void drawMap(Graphics2D g) throws IOException {
-		// Rectangle2D.Double outline = new Rectangle2D.Double(0, 0,
-		// FRAME_WIDTH, FRAME_HEIGHT);
-		// g.draw(outline);
-		g.translate(FRAME_WIDTH / 2.0, FRAME_HEIGHT / 2.0);
+		g.translate(this.panelCenterX, this.panelCenterY);
 		
 		for (String s : this.map.keySet()) {
 
@@ -125,7 +128,6 @@ public class MapDrawer extends JPanel implements MouseListener {
 				if (this.routeButtonPressed && this.path.contains(this.map.get(s))) {
 					g.setColor(Color.RED);
 					g.setStroke(new BasicStroke(2));
-//					System.out.println("Gets here");
 					g.draw(path);
 					g.setColor(Color.BLACK);
 				} else {
@@ -140,8 +142,6 @@ public class MapDrawer extends JPanel implements MouseListener {
 
 			BufferedImage image = null;
 
-			// System.out.println(this.map.get(s).getName() + ": " + rect.x + "
-			// " + rect.y);
 			if (type.equals("City")) {
 				image = ImageIO.read(new File("CitySymbol.png"));
 			}
@@ -157,27 +157,20 @@ public class MapDrawer extends JPanel implements MouseListener {
 			g.drawImage(image, (int) rect.getX(), (int) rect.getY(), (int) rect.getWidth(), (int) rect.getHeight(),
 					Color.BLACK, this);
 
-			// g.fill(rect);
 			float labelX = (float) (point.x * -FRAME_MULTIPLIER + MAP_RADIUS / 2.0);
 			float labelY = (float) (point.y * -FRAME_MULTIPLIER + MAP_RADIUS);
 			g.setColor(Color.BLACK);
 			g.drawString(this.map.get(s).getName(), labelX, labelY);
 		}
 
-		g.translate(-FRAME_WIDTH / 2.0, -FRAME_HEIGHT / 2.0);
+		g.translate(-this.panelCenterX, -this.panelCenterY);
 	}
 
-	// private Shape nearestPOI(Point2D point) {
-	// for(Shape s : this.shapes.keySet()) {
-	// double distance = point.distance(s.)
-	// }
-	// }
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// System.out.println("Should print");
-		double mouseX = e.getX() - FRAME_WIDTH / 2.0 - MAP_RADIUS / 2.0;
-		double mouseY = e.getY() - FRAME_HEIGHT / 2.0 - MAP_RADIUS / 2.0;
+		double mouseX = e.getX() - this.panelCenterX - MAP_RADIUS / 2.0;
+		double mouseY = e.getY() - this.panelCenterY - MAP_RADIUS / 2.0;
 		for (Shape s : this.shapes.keySet()) {
 			double exs = Math.pow(mouseX - s.getBounds2D().getX(), 2);
 			double whys = Math.pow(mouseY - s.getBounds2D().getY(), 2);
@@ -207,14 +200,20 @@ public class MapDrawer extends JPanel implements MouseListener {
 	}
 
 	@Override
-	public void mousePressed(MouseEvent arg0) {
-		// TODO Auto-generated method stub.
-
+	public void mousePressed(MouseEvent e) {
+		this.mousePressed = true;
+		this.lastMouseX = e.getX() - this.panelCenterX - MAP_RADIUS / 2.0;
+		this.lastMouseY = e.getY() - this.panelCenterY - MAP_RADIUS / 2.0;
 	}
 
 	@Override
-	public void mouseReleased(MouseEvent arg0) {
-		// TODO Auto-generated method stub.
-
+	public void mouseReleased(MouseEvent e) {
+		double xDiff = (e.getX() - this.panelCenterX - MAP_RADIUS / 2.0) - this.lastMouseX;
+		double yDiff = (e.getY() - this.panelCenterY - MAP_RADIUS / 2.0) - this.lastMouseY;
+		this.panelCenterX = this.panelCenterX + xDiff;
+		this.panelCenterY = this.panelCenterY + yDiff;
+		this.lastMouseX = e.getX() - this.panelCenterX - MAP_RADIUS / 2.0;
+		this.lastMouseY = e.getY() - this.panelCenterY - MAP_RADIUS / 2.0;
+		repaint();
 	}
 }
