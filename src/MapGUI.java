@@ -433,12 +433,13 @@ public class MapGUI extends javax.swing.JFrame {
 		ResultsForRating resultsTable = new ResultsForRating();
 		resultsTable.setVisible(true);
 	}
+	
+	private void zoomInActionPerformed(java.awt.event.ActionEvent evt) {              
+		this.Map.zoomIn();
+    }                                      
 
-	private void zoomInActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
-	}
+    private void zoomOutActionPerformed(java.awt.event.ActionEvent evt) {                                        
+        this.Map.zoomOut();
+    } 
 
-	private void zoomOutActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
-	}
 }

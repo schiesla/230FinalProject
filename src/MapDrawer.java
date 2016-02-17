@@ -49,7 +49,7 @@ public class MapDrawer extends JPanel implements MouseListener {
 	private static final double HEIGHT = TOP_LEFT_CORNER.y - BOTTOM_LEFT_CORNER.y;
 	private static final Dimension d = new Dimension();
 
-	private static final double FRAME_MULTIPLIER = 100;
+	private static double FRAME_MULTIPLIER = 100;
 	private static final double MAP_RADIUS = FRAME_MULTIPLIER / 4.5;
 
 	private static final double FRAME_WIDTH = WIDTH * FRAME_MULTIPLIER;
@@ -67,7 +67,7 @@ public class MapDrawer extends JPanel implements MouseListener {
 	private double panelCenterX = FRAME_WIDTH/2.0;
 	private double panelCenterY = FRAME_HEIGHT/2.0;
 	
-	private boolean mousePressed = false;
+	private int zoomCount = 0;
 
 	private HashMap<Shape, Map.PointofInterest> shapes = new HashMap<Shape, Map.PointofInterest>();
 	private HashMap<Color, Map.Connection> connections = new HashMap<>();
@@ -95,7 +95,11 @@ public class MapDrawer extends JPanel implements MouseListener {
 		} catch (IOException exception1) {
 			exception1.printStackTrace();
 		}
-		g2.drawImage(image, (int) (-(FRAME_WIDTH/2.0) + this.panelCenterX), (int) (-(FRAME_HEIGHT/2.0) + this.panelCenterY), (int) FRAME_WIDTH, (int) FRAME_HEIGHT, this);
+		
+		g2.drawImage(image, (int) (-(FRAME_WIDTH/2.0) + this.panelCenterX - (this.zoomCount * 3.5)), 
+				(int) (-(FRAME_HEIGHT/2.0) + this.panelCenterY - (this.zoomCount * 2)), 
+				(int) (FRAME_WIDTH - (100 - this.FRAME_MULTIPLIER - this.zoomCount * 6)), 
+				(int) (FRAME_HEIGHT - (100 - this.FRAME_MULTIPLIER - this.zoomCount * 2.8)), this);
 		
 		try {
 			this.drawMap(g2);
@@ -127,7 +131,7 @@ public class MapDrawer extends JPanel implements MouseListener {
 				Line2D.Double path = new Line2D.Double(point.getX() * -FRAME_MULTIPLIER,
 						point.getY() * -FRAME_MULTIPLIER, pointLine.getX() * -FRAME_MULTIPLIER,
 						pointLine.getY() * -FRAME_MULTIPLIER);
-				if (this.routeButtonPressed && this.path.contains(this.map.get(s))) {
+				if (this.routeButtonPressed && this.path.contains(this.map.get(s)) && this.path.contains(conn.getOtherPoint())) {
 					g.setColor(Color.RED);
 					g.setStroke(new BasicStroke(2));
 					g.draw(path);
@@ -159,13 +163,25 @@ public class MapDrawer extends JPanel implements MouseListener {
 			g.drawImage(image, (int) rect.getX(), (int) rect.getY(), (int) rect.getWidth(), (int) rect.getHeight(),
 					Color.BLACK, this);
 
-			float labelX = (float) (point.x * -FRAME_MULTIPLIER + MAP_RADIUS / 2.0);
-			float labelY = (float) (point.y * -FRAME_MULTIPLIER + MAP_RADIUS);
+			float labelX = (float) (point.x * -FRAME_MULTIPLIER + MAP_RADIUS/2.0);
+			float labelY = (float) (point.y * -FRAME_MULTIPLIER);
 			g.setColor(Color.BLACK);
 			g.drawString(this.map.get(s).getName(), labelX, labelY);
 		}
 
 		g.translate(-this.panelCenterX, -this.panelCenterY);
+	}
+	
+	public void zoomIn() {
+		this.FRAME_MULTIPLIER = this.FRAME_MULTIPLIER + 8;
+		this.zoomCount = this.zoomCount + 8;
+		repaint();
+	}
+	
+	public void zoomOut() {
+		this.FRAME_MULTIPLIER = this.FRAME_MULTIPLIER - 8;
+		this.zoomCount = this.zoomCount - 8;
+		repaint();
 	}
 
 
@@ -209,7 +225,6 @@ public class MapDrawer extends JPanel implements MouseListener {
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		this.mousePressed = true;
 		this.lastMouseX = e.getX() - this.panelCenterX - MAP_RADIUS / 2.0;
 		this.lastMouseY = e.getY() - this.panelCenterY - MAP_RADIUS / 2.0;
 	}
