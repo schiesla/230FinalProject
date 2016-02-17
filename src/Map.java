@@ -136,6 +136,7 @@ public class Map {
 //		return val;
 //		
 //	}
+	
 	public LinkedList<PointofInterest> navigate(String to, String from){
 		LinkedList<PointofInterest> path = new LinkedList<PointofInterest>();
 		PriorityQueue<PointofInterest> shortestDist = new PriorityQueue<PointofInterest>(new Comparator<PointofInterest>() {
@@ -178,13 +179,52 @@ public class Map {
 			}
 		}
 		
-		for(int i = path.size() - 1; i > 1; i--) {
+		for(int i = path.size() - 1; i > 0; i--) {
 			
 			this.navigationDist += path.get(i - 1).DistToNeighbor(path.get(i));
 		}
 		
 		System.out.println(path.toString());
 		return path;
+	}
+	
+	public ArrayList<PointofInterest> searchByRating(double rating) {
+		
+		ArrayList<PointofInterest> results = new ArrayList<>();
+		
+//		if(this.ratings.find(rating) == null) {
+//			
+//			this.ratings.add(new PointofInterest("ratingTemp", "kernell", 0, 0, rating));
+//		
+//		} else {
+//		
+//			PointofInterest start = this.ratings.find(rating);
+//			this.ratings.add(start);
+//		}
+//			
+//		if(start.rightChild == null) {
+//			
+//			return results;
+//		}
+//		
+//		start = start.rightChild;
+//
+//		while(true) {
+//			
+//			if(start.rating >= rating) {
+//				
+//				ressults.add(start);
+//				
+//				if(start.rightChild == null) {
+//					
+//					break;
+//				}
+//				
+//				start = start.rightChild;
+//			}
+//		}
+		
+		return results;
 	}
 	
 //	public static void main(String[] args) {

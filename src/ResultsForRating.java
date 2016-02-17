@@ -28,7 +28,7 @@ public class ResultsForRating extends javax.swing.JFrame {
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(0, 51, 255));
-        jPanel1.setFont(new java.awt.Font("Bodoni MT Black", 0, 18)); // NOI18N
+        jPanel1.setFont(new java.awt.Font("Bodoni MT Black", 0, 18));
         jPanel1.setPreferredSize(new java.awt.Dimension(300, 230));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
