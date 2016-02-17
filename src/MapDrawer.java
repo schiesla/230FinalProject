@@ -57,6 +57,7 @@ public class MapDrawer extends JPanel implements MouseListener {
 
 	private JTextField to;
 	private JTextField from;
+	private JTextField waypoint;
 	private boolean routeButtonPressed;
 	private LinkedList path;
 	
@@ -71,12 +72,13 @@ public class MapDrawer extends JPanel implements MouseListener {
 	private HashMap<Shape, Map.PointofInterest> shapes = new HashMap<Shape, Map.PointofInterest>();
 	private HashMap<Color, Map.Connection> connections = new HashMap<>();
 
-	public MapDrawer(HashMap<String, Map.PointofInterest> map, JTextField to, JTextField from) {
+	public MapDrawer(HashMap<String, Map.PointofInterest> map, JTextField to, JTextField from, JTextField waypoint) {
 
 		this.map = map;
 		this.setBackground(new java.awt.Color(255, 255, 255));
 		this.to = to;
 		this.from = from;
+		this.waypoint = waypoint;
 		this.routeButtonPressed = false;
 
 		this.addMouseListener(this);
@@ -181,8 +183,14 @@ public class MapDrawer extends JPanel implements MouseListener {
 					this.to.setText(this.shapes.get(s).getName());
 					this.from.requestFocus();
 				}
-				if (this.from.hasFocus())
+				if (this.from.hasFocus()) {
+					
 					this.from.setText(this.shapes.get(s).getName());
+					this.waypoint.requestFocus();
+				}
+				
+				if(this.waypoint.hasFocus())
+					this.waypoint.setText(this.shapes.get(s).getName());
 			}
 		}
 	}
