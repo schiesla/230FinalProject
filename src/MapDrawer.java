@@ -93,8 +93,8 @@ public class MapDrawer extends JPanel implements MouseListener {
 		} catch (IOException exception1) {
 			exception1.printStackTrace();
 		}
-		g2.drawImage(image, 0, 0, (int) FRAME_WIDTH, (int) FRAME_HEIGHT, this);
-
+		g2.drawImage(image, (int) (-(FRAME_WIDTH/2.0) + this.panelCenterX), (int) (-(FRAME_HEIGHT/2.0) + this.panelCenterY), (int) FRAME_WIDTH, (int) FRAME_HEIGHT, this);
+		
 		try {
 			this.drawMap(g2);
 		} catch (IOException exception) {
