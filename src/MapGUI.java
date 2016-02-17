@@ -7,7 +7,7 @@ public class MapGUI extends javax.swing.JFrame {
 	private javax.swing.JRadioButton GetResultByTime;
 	private javax.swing.JLabel LocationLabel;
 	private javax.swing.JTextField LocationTextInput;
-	private javax.swing.JPanel Map;
+//	private javax.swing.JPanel Map;
 	private javax.swing.JPanel Navigation;
 	private javax.swing.JLabel Path;
 	private javax.swing.JSpinner RatingSpinner;
@@ -17,9 +17,10 @@ public class MapGUI extends javax.swing.JFrame {
 	private javax.swing.JLabel TravelDistTime;
 	private javax.swing.JComboBox<String> WaypointDropDown;
 	private javax.swing.JSplitPane jSplitPane3;
-
+	
 	private boolean displayDistance = true;
 	private Map guiMap;
+	private MapDrawer Map;
 
 	public MapGUI(Map map) {
 		this.guiMap = map;
@@ -283,9 +284,9 @@ public class MapGUI extends javax.swing.JFrame {
 				String time = String.format("%.2f", (this.guiMap.navigationDist / 50));
 				TravelDistTime.setText("Travel Time: " + time + " h");
 			}
-
+			this.Map.setRouteButtonPressed(this.guiMap.navigate(to, from));
+			this.Map.repaint();
 			this.guiMap.navigationDist = 0;
-
 		} else if (DestinationTextInput.getText().equals("") && !LocationTextInput.getText().equals("")) {
 			DestinationTextInput.setText("choose a place");
 		} else if (!DestinationTextInput.getText().equals("") && LocationTextInput.getText().equals("")) {

@@ -1,3 +1,4 @@
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -12,6 +13,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.LinkedList;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
@@ -55,6 +57,8 @@ public class MapDrawer extends JPanel implements MouseListener {
 
 	private JTextField to;
 	private JTextField from;
+	private boolean routeButtonPressed;
+	private LinkedList path;
 
 	private HashMap<Shape, Map.PointofInterest> shapes = new HashMap<Shape, Map.PointofInterest>();
 	private HashMap<Color, Map.Connection> connections = new HashMap<>();
@@ -67,6 +71,7 @@ public class MapDrawer extends JPanel implements MouseListener {
 		this.setBackground(new java.awt.Color(255, 255, 255));
 		this.to = to;
 		this.from = from;
+		this.routeButtonPressed = false;
 
 		this.addMouseListener(this);
 	}
@@ -90,6 +95,11 @@ public class MapDrawer extends JPanel implements MouseListener {
 			exception.printStackTrace();
 		}
 	}
+	
+	public void setRouteButtonPressed(LinkedList path) {
+		this.path = path;
+		this.routeButtonPressed = true;
+	}
 
 	public void drawMap(Graphics2D g) throws IOException {
 		// Rectangle2D.Double outline = new Rectangle2D.Double(0, 0,
@@ -112,7 +122,16 @@ public class MapDrawer extends JPanel implements MouseListener {
 				Line2D.Double path = new Line2D.Double(point.getX() * -FRAME_MULTIPLIER,
 						point.getY() * -FRAME_MULTIPLIER, pointLine.getX() * -FRAME_MULTIPLIER,
 						pointLine.getY() * -FRAME_MULTIPLIER);
-				g.draw(path);
+				if (this.routeButtonPressed && this.path.contains(this.map.get(s))) {
+					g.setColor(Color.RED);
+					g.setStroke(new BasicStroke(2));
+//					System.out.println("Gets here");
+					g.draw(path);
+					g.setColor(Color.BLACK);
+				} else {
+					g.setStroke(new BasicStroke(0));
+					g.draw(path);
+				}
 			}
 
 			Rectangle2D.Double rect = new Rectangle2D.Double(point.x * -FRAME_MULTIPLIER - MAP_RADIUS / 2.0,
