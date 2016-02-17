@@ -3,14 +3,11 @@ import java.io.FileNotFoundException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.Scanner;
 import java.util.TreeSet;
-
-import javax.swing.tree.TreeNode;
 
 public class Map {
 	
@@ -22,7 +19,7 @@ public class Map {
 	public Map() {
 		
 		this.tableOfPOIs = new HashMap<>();
-		this.ratings = new TreeSet<>(new POIComparator());
+//		this.ratings = new TreeSet<>(new POIComparator());
 //		this.connections = new HashMap<>();
 		this.populateMap();
 		this.populateNeighbors();
@@ -266,7 +263,7 @@ public class Map {
 		return this.tableOfPOIs;
 	}
 	
-	public class PointofInterest implements TreeNode {
+	public class PointofInterest {
 		private String name;
 		private String type;
 		public double straightLineDist;
@@ -363,41 +360,6 @@ public class Map {
 			
 			return this.getName();
 		}
-
-		@Override
-		public Enumeration children() {
-			return null;
-		}
-
-		@Override
-		public boolean getAllowsChildren() {
-			return false;
-		}
-
-		@Override
-		public TreeNode getChildAt(int childIndex) {
-			return null;
-		}
-
-		@Override
-		public int getChildCount() {
-			return 0;
-		}
-
-		@Override
-		public int getIndex(TreeNode node) {
-			return 0;
-		}
-
-		@Override
-		public TreeNode getParent() {
-			return null;
-		}
-
-		@Override
-		public boolean isLeaf() {
-			return false;
-		}
 	}
 	
 	public class Connection {
@@ -424,21 +386,6 @@ public class Map {
 		public String toString() {
 			
 			return this.otherPoint.getName() + " : " + this.distance;
-		}
-	}
-	
-	public class POIComparator  implements Comparator<PointofInterest> {
-
-		public POIComparator(){
-			super();
-		}
-
-		@Override
-		public int compare(PointofInterest poi1, PointofInterest poi2) {
-			
-			if(poi1.getRating() > poi2.getRating()) return 1;
-			else if(poi1.getRating() < poi2.getRating()) return -1;
-			else return( poi1.equals(poi2)? 0 : 1);
 		}
 	}
 }
