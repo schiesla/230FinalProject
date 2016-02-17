@@ -118,19 +118,19 @@ public class MapGUI extends javax.swing.JFrame {
 			}
 		});
 
-		zoomIn.setText("+");
-		zoomIn.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				actionPerformed(evt);
-			}
-		});
+		 zoomIn.setText("+");
+	        zoomIn.addActionListener(new java.awt.event.ActionListener() {
+	            public void actionPerformed(java.awt.event.ActionEvent evt) {
+	                zoomInActionPerformed(evt);
+	            }
+	        });
 
-		zoomOut.setText("-");
-		zoomOut.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				actionPerformed(evt);
-			}
-		});
+	        zoomOut.setText("-");
+	        zoomOut.addActionListener(new java.awt.event.ActionListener() {
+	            public void actionPerformed(java.awt.event.ActionEvent evt) {
+	                zoomOutActionPerformed(evt);
+	            }
+	        });
 
 		javax.swing.GroupLayout MapLayout = new javax.swing.GroupLayout(Map);
 		Map.setLayout(MapLayout);
@@ -351,4 +351,12 @@ public class MapGUI extends javax.swing.JFrame {
 		ResultsForRating resultsTable = new ResultsForRating();
 		resultsTable.setVisible(true);
 	}
+	
+	private void zoomInActionPerformed(java.awt.event.ActionEvent evt) {                                       
+        // TODO add your handling code here:
+    }                                      
+
+    private void zoomOutActionPerformed(java.awt.event.ActionEvent evt) {                                        
+        // TODO add your handling code here:
+    } 
 }
