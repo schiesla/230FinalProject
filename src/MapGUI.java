@@ -572,7 +572,7 @@ public class MapGUI extends javax.swing.JFrame {
 		ResultsForRating resultsTable = new ResultsForRating();
 		System.out.println(results);
 		for (int i = 0; i < results.size(); i++) {
-//			resultsTable.add(results.get(i).getName(), results.get(i).getRating());
+			resultsTable.add(results.get(i).getName(), results.get(i).getRating());
 		}
 		resultsTable.setVisible(true);
 	}
