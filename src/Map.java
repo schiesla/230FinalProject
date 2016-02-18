@@ -148,7 +148,7 @@ public class Map {
 		
 		shortestDist.add(this.tableOfPOIs.get(from));
 		int count = 1;
-		while(count < 15){
+		while(count < 50){
 			PointofInterest location = shortestDist.poll();
 			if(location.getName().equals(to)){
 				path.add(location);
