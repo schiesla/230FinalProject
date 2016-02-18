@@ -88,6 +88,18 @@ public class MapDrawer extends JPanel implements MouseListener {
 		System.out.println("its drawing");
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
+		
+		BufferedImage outside = null;
+		try {
+			outside = ImageIO.read(new File("NOT COLORADO!!!.png"));
+		} catch (IOException exception2) {
+			exception2.printStackTrace();
+		}
+		
+		g2.drawImage(outside, (int) (-(250 + FRAME_WIDTH/2.0) + this.panelCenterX - (this.zoomCount * 6)), 
+				(int) (-(175 + FRAME_HEIGHT/2.0) + this.panelCenterY - (this.zoomCount * 3.7)), 
+				(int) (1200 - (100 - this.FRAME_MULTIPLIER - this.zoomCount * 11)),
+				(int) (750 - (100 - this.FRAME_MULTIPLIER - this.zoomCount * 6.2)), this);
 
 		BufferedImage image = null;
 		try {
@@ -100,6 +112,10 @@ public class MapDrawer extends JPanel implements MouseListener {
 				(int) (-(FRAME_HEIGHT/2.0) + this.panelCenterY - (this.zoomCount * 2)), 
 				(int) (FRAME_WIDTH - (100 - this.FRAME_MULTIPLIER - this.zoomCount * 6)), 
 				(int) (FRAME_HEIGHT - (100 - this.FRAME_MULTIPLIER - this.zoomCount * 2.8)), this);
+		g2.drawRect((int) (-(FRAME_WIDTH/2.0) + this.panelCenterX - (this.zoomCount * 3.5)), 
+				(int) (-(FRAME_HEIGHT/2.0) + this.panelCenterY - (this.zoomCount * 2)), 
+				(int) (FRAME_WIDTH - (100 - this.FRAME_MULTIPLIER - this.zoomCount * 6)), 
+				(int) (FRAME_HEIGHT - (100 - this.FRAME_MULTIPLIER - this.zoomCount * 2.8)));
 		
 		try {
 			this.drawMap(g2);
@@ -114,6 +130,7 @@ public class MapDrawer extends JPanel implements MouseListener {
 	}
 
 	public void drawMap(Graphics2D g) throws IOException {
+		
 		g.translate(this.panelCenterX, this.panelCenterY);
 		
 		for (String s : this.map.keySet()) {
