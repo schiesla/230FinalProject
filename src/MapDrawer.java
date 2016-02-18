@@ -85,7 +85,7 @@ public class MapDrawer extends JPanel implements MouseListener {
 	}
 
 	public void paintComponent(Graphics g) {
-		System.out.println("its drawing");
+		System.out.println("");
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
 		
@@ -187,6 +187,7 @@ public class MapDrawer extends JPanel implements MouseListener {
 		}
 
 		g.translate(-this.panelCenterX, -this.panelCenterY);
+		System.out.println("Panel: " + this.panelCenterX + " " + this.panelCenterY);
 	}
 	
 	public void zoomIn() {
@@ -206,6 +207,7 @@ public class MapDrawer extends JPanel implements MouseListener {
 	public void mouseClicked(MouseEvent e) {
 		double mouseX = e.getX() - this.panelCenterX - MAP_RADIUS / 2.0;
 		double mouseY = e.getY() - this.panelCenterY - MAP_RADIUS / 2.0;
+		System.out.println("Mouse: " + mouseX + " " + mouseY);
 		for (Shape s : this.shapes.keySet()) {
 			double exs = Math.pow(mouseX - s.getBounds2D().getX(), 2);
 			double whys = Math.pow(mouseY - s.getBounds2D().getY(), 2);
