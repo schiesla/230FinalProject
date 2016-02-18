@@ -7,18 +7,19 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.Scanner;
-import java.util.TreeSet;
 
 public class Map {
 	
 	private HashMap<String, Map.PointofInterest> tableOfPOIs;
-	private TreeSet<Map.PointofInterest> ratings;
+//	private TreeSet<Map.PointofInterest> ratings;
+	private RedBlackTree ratings;
 	public double navigationDist = 0;
 //	private HashMap<Integer, Connection> connections;
 
 	public Map() {
 		
 		this.tableOfPOIs = new HashMap<>();
+		this.ratings = new RedBlackTree<>();
 //		this.ratings = new TreeSet<>(new POIComparator());
 //		this.connections = new HashMap<>();
 		this.populateMap();
@@ -71,7 +72,7 @@ public class Map {
 				PointofInterest poi = new PointofInterest(name, type, lat, longit, rating);
 				
 				this.tableOfPOIs.put(poi.getName(), poi);
-				this.ratings.add(poi);
+				this.ratings.insert(poi);
 				count = -1;
 				input.nextLine();
 			}
@@ -187,7 +188,15 @@ public class Map {
 	
 	public ArrayList<PointofInterest> searchByRating(double rating) {
 		
-		ArrayList<PointofInterest> results = new ArrayList<>();
+		ArrayList<PointofInterest>  results = this.ratings.toArrayList();
+		ArrayList<PointofInterest>  returnList = new ArrayList<PointofInterest>();
+		 
+		for(int i = 0; i < results.size(); i++){
+			if(results.get(i).getRating() >= rating){
+				returnList.add(results.get(i));
+			}
+		}
+		 
 		
 //		if(this.ratings.find(rating) == null) {
 //			
@@ -221,7 +230,7 @@ public class Map {
 //			}
 //		}
 		
-		return results;
+		return returnList;
 	}
 	
 //	public static void main(String[] args) {
@@ -263,7 +272,8 @@ public class Map {
 		return this.tableOfPOIs;
 	}
 	
-	public class PointofInterest {
+
+	public class PointofInterest implements Comparable<PointofInterest> {
 		private String name;
 		private String type;
 		public double straightLineDist;
@@ -360,6 +370,14 @@ public class Map {
 			
 			return this.getName();
 		}
+
+		
+		public int compareTo(PointofInterest arg) {
+			if(this.rating < arg.rating) return 1;
+			if(this.rating > arg.rating) return -1;
+			return 0;
+		}
+
 	}
 	
 	public class Connection {
@@ -388,4 +406,22 @@ public class Map {
 			return this.otherPoint.getName() + " : " + this.distance;
 		}
 	}
+
+	
+//	public class POIComparator  implements Comparator<PointofInterest> {
+//
+//		public POIComparator(){
+//			super();
+//		}
+//
+//		@Override
+//		public int compare(PointofInterest poi1, PointofInterest poi2) {
+//			
+//			if(poi1.getRating() > poi2.getRating()) return 1;
+//			else if(poi1.getRating() < poi2.getRating()) return -1;
+//			else return( poi1.equals(poi2)? 0 : 1);
+//		}
+//	}
+
 }
+

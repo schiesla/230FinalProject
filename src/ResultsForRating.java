@@ -1,3 +1,4 @@
+
 /**
  *
  * @author 
@@ -97,5 +98,9 @@ public class ResultsForRating extends javax.swing.JFrame {
         );
 
         pack();
-    }                        
+    }    
+    
+//    public void add(String place, double rating){
+//    	jTable1.
+//    }
 }
