@@ -1,10 +1,5 @@
 import javax.swing.table.DefaultTableModel;
 
-
-/**
- *
- * @author 
- */
 public class ResultsForRating extends javax.swing.JFrame {
 
     private javax.swing.JPanel jPanel1;
@@ -26,11 +21,11 @@ public class ResultsForRating extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setBackground(new java.awt.Color(0, 51, 255));
+        setBackground(new java.awt.Color(51, 153, 255));
         setPreferredSize(new java.awt.Dimension(360, 410));
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(0, 51, 255));
+        jPanel1.setBackground(new java.awt.Color(51, 153, 255));
         jPanel1.setFont(new java.awt.Font("Bodoni MT Black", 0, 18));
         jPanel1.setPreferredSize(new java.awt.Dimension(300, 230));
 
