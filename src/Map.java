@@ -148,8 +148,9 @@ public class Map {
 		
 		shortestDist.add(this.tableOfPOIs.get(from));
 		int count = 1;
-		while(count < 50){
+		while(true){
 			PointofInterest location = shortestDist.poll();
+			
 			if(location.getName().equals(to)){
 				path.add(location);
 				break;
@@ -157,7 +158,7 @@ public class Map {
 			for(int i = 0; i < location.neighbors.size(); i++){
 				location.neighbors.get(i).getOtherPoint().distToTravel = location.neighbors.get(i).distance + location.neighbors.get(i).getOtherPoint().straightLineDist; 
 				
-				if(!shortestDist.contains(location) || !path.contains(location)) {
+				if(!shortestDist.contains(location) && !path.contains(location)) {
 					
 					shortestDist.add(location.neighbors.get(i).getOtherPoint());
 				}
@@ -167,7 +168,6 @@ public class Map {
 			path.add(location);
 			count++;
 		}
-		//call a function that will illustrate the shortest path by drawing it on the map.
 		
 		for(int i = path.size() - 1; i > 1; i--) {
 			
