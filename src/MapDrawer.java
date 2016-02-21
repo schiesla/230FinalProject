@@ -81,7 +81,7 @@ public class MapDrawer extends JPanel implements MouseListener {
 		this.from = from;
 		this.waypoint = waypoint;
 		this.routeButtonPressed = false;
-		this.showPaths = false;
+		this.showPaths = true;
 
 		this.addMouseListener(this);
 	}
@@ -91,17 +91,17 @@ public class MapDrawer extends JPanel implements MouseListener {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
 
-		BufferedImage outside = null;
-		try {
-			outside = ImageIO.read(new File("NOT COLORADO!!!.png"));
-		} catch (IOException exception2) {
-			exception2.printStackTrace();
-		}
-
-		g2.drawImage(outside, (int) (-(250 + FRAME_WIDTH / 2.0) + this.panelCenterX - (this.zoomCount * 6)),
-				(int) (-(175 + FRAME_HEIGHT / 2.0) + this.panelCenterY - (this.zoomCount * 3.7)),
-				(int) (1200 - (100 - this.FRAME_MULTIPLIER - this.zoomCount * 11)),
-				(int) (750 - (100 - this.FRAME_MULTIPLIER - this.zoomCount * 6.2)), this);
+//		BufferedImage outside = null;
+//		try {
+//			outside = ImageIO.read(new File("NOT COLORADO!!!.png"));
+//		} catch (IOException exception2) {
+//			exception2.printStackTrace();
+//		}
+//
+//		g2.drawImage(outside, (int) (-(250 + FRAME_WIDTH / 2.0) + this.panelCenterX - (this.zoomCount * 6)),
+//				(int) (-(175 + FRAME_HEIGHT / 2.0) + this.panelCenterY - (this.zoomCount * 3.7)),
+//				(int) (1200 - (100 - this.FRAME_MULTIPLIER - this.zoomCount * 11)),
+//				(int) (750 - (100 - this.FRAME_MULTIPLIER - this.zoomCount * 6.2)), this);
 
 		BufferedImage image = null;
 		try {
