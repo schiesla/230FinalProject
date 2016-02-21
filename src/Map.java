@@ -82,7 +82,7 @@ public class Map {
 
 	/**
 	 * 
-	 * Assigns neighbors to all POIs
+	 * Assigns neighbors to all POIs from the neighbor text files
 	 *
 	 */
 	@SuppressWarnings("resource")
@@ -234,7 +234,13 @@ public class Map {
 	public HashMap<String, Map.PointofInterest> getTablePOIs() {
 		return this.tableOfPOIs;
 	}
-
+/**
+ * 
+ * Class that creates points of interest for all the places stored in the text files
+ *
+ * @author schiesla.
+ *         Created Feb 21, 2016.
+ */
 	public class PointofInterest implements Comparable<PointofInterest> {
 		private String name;
 		private String type;
@@ -344,7 +350,14 @@ public class Map {
 		}
 
 	}
-
+/**
+ * 
+ * Points of interest have a list of connections which are the neighboring cities and the distance
+ * to them.
+ *
+ * @author schiesla.
+ *         Created Feb 21, 2016.
+ */
 	public class Connection {
 
 		private PointofInterest otherPoint;

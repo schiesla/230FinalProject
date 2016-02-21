@@ -18,7 +18,13 @@ import java.util.LinkedList;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
+/**
+ * 
+ * Draws the map panel of our gui using lat and long.
+ *
+ * @author schiesla.
+ *         Created Feb 21, 2016.
+ */
 public class MapDrawer extends JPanel implements MouseListener {
 
 	private HashMap<String, Map.PointofInterest> map;

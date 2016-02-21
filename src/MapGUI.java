@@ -1,7 +1,13 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
-
+/**
+ * 
+ * Creates the gui and all its action listeners, and buttons.
+ *
+ * @author schiesla.
+ *         Created Feb 21, 2016.
+ */
 public class MapGUI extends javax.swing.JFrame {
 
 	private javax.swing.JButton AddWaypointButton;
