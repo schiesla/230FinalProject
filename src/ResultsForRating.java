@@ -5,11 +5,13 @@ public class ResultsForRating extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private String rating;
     
     /**
      * Creates new form ResultsForRating
      */
-    public ResultsForRating() {
+    public ResultsForRating(String rating) {
+    	this.rating = rating;
         initComponents();
     }
 
@@ -34,7 +36,7 @@ public class ResultsForRating extends javax.swing.JFrame {
                 
             },
             new String [] {
-                "Results with Rating >"
+                "Results with Rating > " + this.rating
             }
         ) {
             boolean[] canEdit = new boolean [] {

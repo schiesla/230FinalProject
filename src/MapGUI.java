@@ -448,7 +448,7 @@ public class MapGUI extends javax.swing.JFrame {
 		ArrayList<Map.PointofInterest> results = this.guiMap
 				.searchByRating(Double.parseDouble(ratingTextInput.getText()));
 
-		ResultsForRating resultsTable = new ResultsForRating();
+		ResultsForRating resultsTable = new ResultsForRating(this.ratingTextInput.getText());
 		for (int i = 0; i < results.size(); i++) {
 			resultsTable.add(results.get(i).getName(), results.get(i).getRating());
 		}

@@ -28,12 +28,12 @@ public class TripPlannerFrame extends javax.swing.JFrame {
 		setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
 		resultsPanel.setBackground(new java.awt.Color(0, 153, 255));
-		resultsPanel.setFont(new java.awt.Font("Bodoni MT Black", 0, 18)); // NOI18N
+		resultsPanel.setFont(new java.awt.Font("Bodoni MT Black", 0, 18));
 		resultsPanel.setPreferredSize(new java.awt.Dimension(290, 350));
 
-		titleLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+		titleLabel.setFont(new java.awt.Font("Tahoma", 0, 16));
 		titleLabel.setForeground(new java.awt.Color(0, 102, 0));
-		titleLabel.setText("Results within given range:");
+		titleLabel.setText("Destinations within given range:");
 
 		javax.swing.GroupLayout resultsPanelLayout = new javax.swing.GroupLayout(resultsPanel);
 		resultsPanel.setLayout(resultsPanelLayout);

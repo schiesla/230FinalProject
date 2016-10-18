@@ -18,12 +18,12 @@ import java.util.LinkedList;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
 /**
  * 
  * Draws the map panel of our gui using lat and long.
  *
- * @author schiesla.
- *         Created Feb 21, 2016.
+ * @author schiesla. Created Feb 21, 2016.
  */
 public class MapDrawer extends JPanel implements MouseListener {
 
@@ -87,7 +87,7 @@ public class MapDrawer extends JPanel implements MouseListener {
 		this.from = from;
 		this.waypoint = waypoint;
 		this.routeButtonPressed = false;
-		this.showPaths = true;
+		this.showPaths = false;
 
 		this.addMouseListener(this);
 	}
@@ -97,17 +97,20 @@ public class MapDrawer extends JPanel implements MouseListener {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
 
-//		BufferedImage outside = null;
-//		try {
-//			outside = ImageIO.read(new File("NOT COLORADO!!!.png"));
-//		} catch (IOException exception2) {
-//			exception2.printStackTrace();
-//		}
-//
-//		g2.drawImage(outside, (int) (-(250 + FRAME_WIDTH / 2.0) + this.panelCenterX - (this.zoomCount * 6)),
-//				(int) (-(175 + FRAME_HEIGHT / 2.0) + this.panelCenterY - (this.zoomCount * 3.7)),
-//				(int) (1200 - (100 - this.FRAME_MULTIPLIER - this.zoomCount * 11)),
-//				(int) (750 - (100 - this.FRAME_MULTIPLIER - this.zoomCount * 6.2)), this);
+		// BufferedImage outside = null;
+		// try {
+		// outside = ImageIO.read(new File("NOT COLORADO!!!.png"));
+		// } catch (IOException exception2) {
+		// exception2.printStackTrace();
+		// }
+		//
+		// g2.drawImage(outside, (int) (-(250 + FRAME_WIDTH / 2.0) +
+		// this.panelCenterX - (this.zoomCount * 6)),
+		// (int) (-(175 + FRAME_HEIGHT / 2.0) + this.panelCenterY -
+		// (this.zoomCount * 3.7)),
+		// (int) (1200 - (100 - this.FRAME_MULTIPLIER - this.zoomCount * 11)),
+		// (int) (750 - (100 - this.FRAME_MULTIPLIER - this.zoomCount * 6.2)),
+		// this);
 
 		BufferedImage image = null;
 		try {
@@ -116,7 +119,7 @@ public class MapDrawer extends JPanel implements MouseListener {
 			exception1.printStackTrace();
 		}
 
-		g2.drawImage(image, (int) (-(FRAME_WIDTH / 2.0) + this.panelCenterX - 15  - (this.zoomCount * 3.5)),
+		g2.drawImage(image, (int) (-(FRAME_WIDTH / 2.0) + this.panelCenterX - 15 - (this.zoomCount * 3.5)),
 				(int) (-(FRAME_HEIGHT / 2.0) + this.panelCenterY - 5 - (this.zoomCount * 2)),
 				(int) (FRAME_WIDTH - (100 - this.FRAME_MULTIPLIER - this.zoomCount * 6)),
 				(int) (FRAME_HEIGHT - (100 - this.FRAME_MULTIPLIER - this.zoomCount * 2.8)), this);
@@ -181,9 +184,9 @@ public class MapDrawer extends JPanel implements MouseListener {
 						pointLine.getY() * -FRAME_MULTIPLIER);
 
 				g.setStroke(new BasicStroke(0));
-				
-				if(this.showPaths) {
-					
+
+				if (this.showPaths) {
+
 					g.draw(path);
 				}
 			}
